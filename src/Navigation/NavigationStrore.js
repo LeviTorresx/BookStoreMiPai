@@ -2,7 +2,7 @@ import React from "react";
 import { FaUser } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
-export default function Navigation() {
+export default function NavigationStore() {
   return (
     <div>
       <nav className="navbar bg-navbar">

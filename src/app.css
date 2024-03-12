@@ -3,6 +3,9 @@
 .bg-navbar {
   background-color: rgb(255, 255, 255, 0.2); /* Color de fondo con opacidad del 20% */
 }
+.bg-navbar-log{
+  background-color: rgb(255, 255, 255, 0.2); /* Color de fondo con opacidad del 20% */
+}
 
 .bg-container {
     width: 100%;
@@ -16,6 +19,10 @@
     background: linear-gradient(to bottom right, #B6CCD7, #FAA591);
   }
   
+  .container-sidebar{
+    height: 100%;
+    position: fixed;
+  }
 
   .sidebar {
     height:100%;
