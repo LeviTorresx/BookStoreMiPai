@@ -17,22 +17,22 @@ export default function SideBar() {
         </li>
         <li>
           <a href="/profile">
-            <FaFireAlt size={"30"} /> <span> Categories</span>
+            <FaFireAlt size={"30"} /> <span> Best sellers</span>
           </a>
         </li>
         <li>
           <a href="/settings">
-            <FaCheckCircle size={"30"} /> <span> Categories</span>
+            <FaCheckCircle size={"30"} /> <span> Recommended</span>
           </a>
         </li>
         <li>
           <a href="/settings">
-            <FaPercentage size={"30"} /> <span> Categories</span>
+            <FaPercentage size={"30"} /> <span> Off sale</span>
           </a>
         </li>
         <li>
           <a href="/settings">
-            <FaUserGroup size={"30"} /> <span> Categories</span>
+            <FaUserGroup size={"30"} /> <span> About us</span>
           </a>
         </li>
       </ul>

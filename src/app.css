@@ -37,7 +37,7 @@
   }
   
   .sidebar:hover {
-    width: 250px; /* Ancho de la barra lateral cuando el cursor está sobre ella */
+    width: 270px; /* Ancho de la barra lateral cuando el cursor está sobre ella */
   }
   
   .sidebar ul {
@@ -59,7 +59,7 @@
 
   .sidebar ul li a span{
     display: none;
-    position: absolute;
+    position: fixed;
     padding-left: 40px;
     opacity: 0;
     transition: opacity 1s ease-in;
@@ -108,9 +108,68 @@
   .container-login{
     position: absolute;
     width:  350px;
-    height: 428px;
+    height: 528px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
+
   }
+
+  .btn-logon{
+    position: fixed;
+    width:  250px;
+    height: 33px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    border: none;
+    background-color: #B6CCD7;
+    font-weight: bold;
+    color: black;
+  }
+
+  .btn-logon:hover{
+    background-color: #64B133;
+    transition: 0.3s;
+  }
+
+  .container-register-apart{
+    position: fixed;
+    width: 350px;
+    height: 50px;
+    background-color: rgb(255, 255, 255);
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+  }
+
+  .container-register-apart span{
+    position: relative;
+    top: 25%;
+    padding: 5px;
+    padding-left: 20px;
+
+  }
+
+  .btn-singup{
+    position: fixed;
+    width: 100px;
+    height: 30px;
+    top: 20%;
+    right:10%;
+    border: none;
+    border-radius: 10px;
+    background-color: #64B133;
+    font-weight: bold;
+    color: black;
+
+  }
+
+  .btn-singup:hover{
+    background-color: #FEB658;
+    transition: 0.3s;
+  }
+
+

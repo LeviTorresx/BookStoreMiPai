@@ -5,7 +5,7 @@ import Store from "./Books/Store";
 
 function App() {
   return (
-    <div className="containers bg-container">
+    <div className="containers">
       <BrowserRouter>
       <Routes>
           <Route  exact path="/" element={<Store/>}/>
