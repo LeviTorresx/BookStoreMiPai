@@ -30,12 +30,11 @@ export default function ClientsTable() {
 
   return (
     <div>
-      <div className="container">
-        <div className="container text-center" style={{ margin: "30px" }}>
+      <div>
+        <div className="containers text-center" style={{ margin: "30px" }}>
           <h3> user of table</h3>
         </div>
-
-        <div>
+        <div className="container">
           <table className="table table-striped table-table-hover align-middle">
             <thead className="table-dark">
               <tr>

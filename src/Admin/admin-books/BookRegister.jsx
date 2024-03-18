@@ -58,7 +58,7 @@ export default function BookRegister() {
         <div className="form-container">
           <h2>Registrar Libro</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="form-group w-auto">
               <input
                 type="text"
                 placeholder="Nombre del Libro"
