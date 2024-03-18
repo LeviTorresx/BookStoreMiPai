@@ -25,6 +25,8 @@ export default function CarrouselImg() {
         showPlayButton = {false}
         showFullscreenButton = {false}
         showThumbnails = {false}
+        showBullets = {true}
+        autoPlay = {true}
         />
       </div>
     </div>
