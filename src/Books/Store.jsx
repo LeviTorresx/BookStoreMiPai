@@ -14,6 +14,11 @@ export default function Store() {
       <div className="content">
         <CarrouselImg/>
         <ProductsBooks />
+        <ProductsBooks />
+        <ProductsBooks />
+        <ProductsBooks />
+
+
       </div>
     </div>
   );

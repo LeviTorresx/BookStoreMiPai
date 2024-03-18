@@ -1,9 +1,16 @@
 import React from "react";
 
+import Books from "./Books";
+
 export default function ProductsBooks() {
   return (
-    <div className="cuadrito">
-
-    </div>
+<div className="flex justify-content-between">
+  <Books/>
+  <Books/>
+  <Books/>
+  <Books/>
+  <Books/>
+    
+</div>
   );
 }
