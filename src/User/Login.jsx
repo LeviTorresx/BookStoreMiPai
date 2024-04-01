@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import axios from "axios";
 import NavigationInit from "../Navigation/NavigationInit";
+import Swal from "sweetalert2";
+import { useNavigate} from "react-router-dom";
 
 export default function Login() {
+  //const [userData, setUserData] = useState(null);
+  const navigation = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -15,15 +21,42 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes manejar la lógica para enviar los datos del formulario
-    console.log(formData);
+    
+    try {
+      const response = await axios.post("http://localhost:8080/users/login", formData);
+      
+      if (response.data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Nice!",
+          text: "Login success",
+        });
+        localStorage.setItem("userData", JSON.stringify(response.data.user)); // Almacena los datos del usuario en el localStorage
+        navigation('/');
+      } else {
+        console.error("Invalid email or password");
+        Swal.fire({ 
+          icon: "error",
+          title: "Oops...",
+          text: "Invalid email or password. Please try again.",
+        }); // Mostrar un mensaje de error al usuario
+      }
+    } catch (error) {
+      console.error("Error during login:", error.response.data);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "An error occurred. Please try again later.",
+      }); // Mostrar un mensaje de error al usuario
+    }
   };
 
   return (
     <div className="bg-container-log">
       <NavigationInit />
+      
       <div>
         <div className="login-form-container">
           <img src="/logoMipaiBookstore1.png" alt="" />
