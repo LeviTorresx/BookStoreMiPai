@@ -5,22 +5,21 @@ import ProductsBooks from "./ProductsBooks";
 import CarrouselImg from "./CarrouselImg";
 
 export default function Store() {
-  return (
-    <div className="bg-container">
+  return ( 
+    <div className="bg-container z-3">
       <NavigationStore />
-      <div className="flex">
+      <div className="flex z-2 position-fixed">
         <SideBar />
       </div>
-      <div className="content">
-        <CarrouselImg/>
-        <ProductsBooks />
-        <ProductsBooks />
-        <ProductsBooks />
-        <ProductsBooks />
-
-
+      <div className="content z-1 position-relative">
+        <CarrouselImg />
+        <div className="my-5  ">
+          <ProductsBooks />
+          <ProductsBooks />
+          <ProductsBooks />
+          <ProductsBooks />
+        </div>
       </div>
     </div>
   );
 }
-  

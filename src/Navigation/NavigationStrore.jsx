@@ -3,8 +3,11 @@ import { FaUser } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 export default function NavigationStore() {
+
+  let user='User profile';
+
   return (
-    <div>
+    <div className="position-fixed z-3 w-100">
       <nav className="navbar bg-navbar">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
@@ -32,8 +35,8 @@ export default function NavigationStore() {
             <a href="/cart" className="btn-ico m-1" type="submit">
               <FaShoppingCart size={"20"} />
             </a>
-            <a href="/login" className="btn-ico m-1" type="submit">
-              <FaUser size={"20"} />
+            <a href="/login" className="btn-ico m-1 " type="submit">
+              <FaUser size={"20"} className="mx-2" /> {user}
             </a>
           </div>
         </div>

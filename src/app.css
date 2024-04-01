@@ -1,5 +1,5 @@
 .bg-navbar {
-  background-color: rgb(255, 255, 255, 0.2); /* Color de fondo con opacidad del 20% */
+  background: linear-gradient(to bottom right, #8D8C7D, #FAA591);
 }
 .bg-navbar-log{
   background-color: rgb(255, 255, 255, 0.2); /* Color de fondo con opacidad del 20% */
@@ -20,10 +20,10 @@
 
   .sidebar {
     width: 70px; /* Ancho de la barra lateral cuando está contraída */
-    height: calc(100vh - 88px);
-    padding-top: 20px; /* Espaciado superior */
-    position: absolute;
-    background-color:rgb(255, 255, 255, 0.2); /* Color de fondo de la barra lateral */
+    height: 100vh;
+    position: initial;
+    padding-top: 100px; /* Espaciado superior */
+    background: linear-gradient(to bottom right, #8D8C7D, #FAA591);
     transition: width 0.5s; /* Transición suave para el cambio de ancho */
     transition: 0.3s ease-out;
   }
@@ -31,7 +31,7 @@
   .sidebar:hover {
     width: 300px; /* Ancho de la barra lateral cuando el cursor está sobre ella */
     transition: 0.3s;
-    background-color:rgb(255, 255, 255, 0.6); /* Color de fondo de la barra lateral */
+
 
   }
   
@@ -109,7 +109,7 @@
   .content {
     display: block;
     padding-left: 85px;
-    padding-top: 10px;
+    padding-top: 129px;
   }
 
   .img-container img {

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import NavigationInit from "../Navigation/NavigationInit";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default function Register() {
-
   let navegacion = useNavigate();
   
   const [user, setUser] = useState({
@@ -14,8 +14,8 @@ export default function Register() {
     userPassword: "",
     userType: "CLIENT",
     phoneNumber: "",
-    address: ""
-    
+    address: "",
+    showAdditionalInfo: false // Agregamos el estado para mostrar información adicional
   });
 
   const toggleAdditionalInfo = () => {
@@ -26,19 +26,49 @@ export default function Register() {
   };
 
   const onInputChange = (e) => {
-      //spread opertator ... (expandir atributos)
-      setUser({...user, [e.target.name]: e.target.value})
-  }
+    setUser({...user, [e.target.name]: e.target.value});
+  };
 
   const onSubmit = async (e) => {
-      e.preventDefault();
-      const urlBase="http://localhost:8080/users/save-user";
-      await axios.post(urlBase, user);
-      // redirifuimos a inicio
-      navegacion('/login') 
-  }
+    e.preventDefault();
 
-  const {userNamen, lastName, email, userPassword, userType, phoneNumber, address} = user
+    // Verificar si el usuario ya existe en la base de datos
+    const userExists = await checkUserExists(user.email);
+
+    if (userExists) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Email already exists!"
+      });
+      navegacion('/login');
+    } else {
+      // Si el usuario no existe, procedemos con el registro
+      const urlBase = "http://localhost:8080/users/save-user";
+      await axios.post(urlBase, user);
+      // redirigimos a la página de inicio de sesión
+      Swal.fire({
+        icon: "success",
+        title: "Nice",
+        text: "Successful Registration!",
+      });
+      navegacion('/login');
+    }
+  };
+
+  // Función para verificar si el usuario ya existe en la base de datos
+  const checkUserExists = async (email) => {
+    const url = `http://localhost:8080/users/exist-email?email=${encodeURIComponent(email)}`;
+    try {
+      const response = await axios.get(url);
+      return response.data;
+    } catch (error) {
+      console.error('Error al verificar si el usuario existe:', error);
+      return false; // En caso de error, asumimos que el usuario no existe para evitar el registro accidental
+    }
+  };
+
+  const {userName, lastName, email, userPassword, userType, phoneNumber, address} = user;
   
   return (
     <div>
@@ -47,13 +77,13 @@ export default function Register() {
         <div>
           <div className="register-form-container">
             <h2 className="container-button">Register</h2>
-            <form  onSubmit={(e) => onSubmit(e)}>
+            <form onSubmit={(e) => onSubmit(e)}>
               <div className="form-group">
                 <input
                   type="text"
                   placeholder="Name"
                   name="userName"
-                  value={user.userName}
+                  value={userName}
                   onChange={(e)=> onInputChange(e)}
                   required
                 />
@@ -63,7 +93,7 @@ export default function Register() {
                   type="text"
                   placeholder="LastName"
                   name="lastName"
-                  value={user.lastName}
+                  value={lastName}
                   onChange={(e)=> onInputChange(e)}
                   required
                 />
@@ -73,7 +103,7 @@ export default function Register() {
                   type="email"
                   placeholder="Email"
                   name="email"
-                  value={user.email}
+                  value={email}
                   onChange={(e)=> onInputChange(e)}
                   required
                 />
@@ -83,7 +113,7 @@ export default function Register() {
                   type="text"
                   placeholder="Password"
                   name="userPassword"
-                  value={user.userPassword}
+                  value={userPassword}
                   onChange={(e)=> onInputChange(e)}
                   required
                 />
@@ -93,7 +123,7 @@ export default function Register() {
                   type="tel"
                   placeholder="Phone Number"
                   name="phoneNumber"
-                  value={user.phoneNumber}
+                  value={phoneNumber}
                   onChange={(e)=> onInputChange(e)}
                   required
                 />
@@ -111,7 +141,7 @@ export default function Register() {
                       type="text"
                       placeholder="Address/City/PostalCode"
                       name="address"
-                      value={user.address}
+                      value={address}
                       onChange={(e)=> onInputChange(e)}
                       required
                     />
@@ -121,7 +151,6 @@ export default function Register() {
               <div className="container-button">
                 <button className="button" type="submit">Registrarse</button>
               </div>
-              
             </form>
           </div>
         </div>
