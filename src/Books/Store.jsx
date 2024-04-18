@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import NavigationStore from "../Navigation/NavigationStrore";
+import NavigationStore from "../Navigation/NavigationStore";
 import SideBar from "../Navigation/SideBar";
 import ProductsBooks from "./ProductsBooks";
-import CarrouselImg from "./CarrouselImg";
-
+import Footer from "../Navigation/Footer";
 
 export default function Store() {
 
@@ -11,30 +10,31 @@ export default function Store() {
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
+    console.log("Datos almacenados en localStorage:", storedUserData);
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
     }
   }, []);
 
   return ( 
-    <div className="bg-container z-3">
+    <div className=" z-3">
       {userData ? (
         <div>
-        <NavigationStore userName={userData.name} />
+        <NavigationStore userName={userData.userName} userLog={true}  />
         </div>
       ): (<NavigationStore/>)}
         
       <div className="flex z-2 position-fixed">
         <SideBar />
       </div>
-      <div className="content z-1 position-relative">
-        <CarrouselImg />
-        <div className="my-5  ">
-          <ProductsBooks />
-          <ProductsBooks />
-          <ProductsBooks />
-          <ProductsBooks />
+      <div className="content z-1">
+        <div>
+          <ProductsBooks/>
+          <ProductsBooks/>
         </div>
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );

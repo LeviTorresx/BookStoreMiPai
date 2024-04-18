@@ -1,12 +1,12 @@
 import React from 'react'
-import { FaUser } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
 
 export default function NavigationInit() {
   return (
     <div>
     <nav className="navbar bg-navbar-log">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+        <a className="navbar-brand p-0 mx-2" href="/">
           <img
             src="./logoMipaiBookstoreFull.png"
             alt="Bootstrap"
@@ -14,8 +14,8 @@ export default function NavigationInit() {
           />
         </a>
         <div className="m-2">
-          <a href="/login" className="btn-ico m-1" type="submit">
-            <FaUser size={"20"} />
+          <a href="/login" className="btn btn-ico m-1" type="submit">
+          <FaRegUser size={'25px'}/>
           </a>
         </div>
       </div>

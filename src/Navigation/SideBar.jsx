@@ -8,7 +8,7 @@ import { FaPercentage } from "react-icons/fa";
   export default function SideBar() {
     return (
       <div>
-        <div className="sidebar">
+        <div className="sidebar bg-light">
           <ul>
             <li>
               <a href="/home">

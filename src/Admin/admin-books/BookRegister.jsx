@@ -1,42 +1,84 @@
+import axios from "axios";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function BookRegister() {
-  const [bookData, setBookData] = useState({
-    title: "",
+  const initialBookData = {
+    bookName: "",
     author: "",
+    editorial: "",
+    bookDescription: "",
     price: "",
+    category: "",
     quantity: "",
-    type: "",
-    image: "",
-    previewImage: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setBookData({
-      ...bookData,
-      [name]: value,
-    });
+    bookType: "",
+    image: null,
   };
 
-  const handleImageChange = (e) => {
-    const imageFile = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
+  const [bookData, setBookData] = useState(initialBookData);
+  //const [imagen, setImagen] = useState(null);
+
+  const categories = [
+    "Ficción contemporánea",
+    "Literatura clásica",
+    "Ciencia ficción",
+    "Fantasía",
+    "Misterio y suspense",
+    "Romance",
+    "No ficción histórica",
+    "Biografías y autobiografías",
+    "Ciencia y divulgación científica",
+    "Autoayuda y desarrollo personal",
+  ];
+
+  const onInputChange = (e) => {
+    if (e.target.name === "image") {
+      const file = e.target.files[0];
       setBookData({
         ...bookData,
-        image: imageFile,
-        previewImage: reader.result,
+        image: file
       });
-    };
-    reader.readAsDataURL(imageFile);
+    } else {
+      setBookData({ ...bookData, [e.target.name]: e.target.value });
+    }
   };
 
-  const handleSubmit = (e) => {
+
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes manejar la lógica para enviar los datos del formulario
-    console.log(bookData);
+
+    try {
+      await axios.post("http://localhost:8080/books/save-book", bookData);
+      console.log(bookData);
+      //console.log(imagen)
+      Swal.fire({
+        icon: "success",
+        title: "¡Excelente!",
+        text: "¡Registro exitoso!",
+      });
+      //setBookData(initialBookData);
+    } catch (error) {
+      console.error("Error al guardar el libro:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "¡Hubo un error al guardar el libro!",
+      });
+    }
   };
+  const {
+    bookName,
+    author,
+    editorial,
+    bookDescription,
+    price,
+    category,
+    quantity,
+    bookType,
+    image,
+  } = bookData;
+
   return (
     <div className="bg-container-log">
       <div className="book-register-form-container">
@@ -45,26 +87,22 @@ export default function BookRegister() {
           <input
             type="file"
             accept="image/*"
-            onChange={handleImageChange}
+            onChange={(e) => onInputChange(e)}
+            name="image"
             required
             className="button"
           />
-          {bookData.previewImage && (
-            <div className="image-preview">
-              <img src={bookData.previewImage} alt="Preview" />
-            </div>
-          )}
         </div>
-        <div className="form-container">
+        <div className="form-container w-50">
           <h2>Registrar Libro</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={onSubmit}>
             <div className="form-group w-auto">
               <input
                 type="text"
-                placeholder="Nombre del Libro"
-                name="title"
-                value={bookData.title}
-                onChange={handleChange}
+                placeholder="Name"
+                name="bookName"
+                value={bookName}
+                onChange={(e) => onInputChange(e)}
                 required
               />
             </div>
@@ -73,41 +111,77 @@ export default function BookRegister() {
                 type="text"
                 placeholder="Autor"
                 name="author"
-                value={bookData.author}
-                onChange={handleChange}
+                value={author}
+                onChange={(e) => onInputChange(e)}
                 required
               />
             </div>
             <div className="form-group">
               <input
-                type="number"
-                placeholder="Precio"
-                name="price"
-                value={bookData.price}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="number"
-                placeholder="Cantidad"
-                name="quantity"
-                value={bookData.quantity}
-                onChange={handleChange}
+                type="text"
+                placeholder="Editorial"
+                name="editorial"
+                value={editorial}
+                onChange={(e) => onInputChange(e)}
                 required
               />
             </div>
             <div className="form-group">
               <select
-                name="type"
-                value={bookData.type}
-                onChange={handleChange}
+                name="category"
+                value={category}
+                onChange={(e) => onInputChange(e)}
+                required
+              >
+                <option value="">Seleccione Categoria</option>
+                {categories.map((cat, index) => (
+                  <option key={index} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <textarea
+                className="w-100 border border-secondary-subtle rounded-2 "
+                type="text"
+                placeholder="Description"
+                name="bookDescription"
+                value={bookDescription}
+                onChange={(e) => onInputChange(e)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="number"
+                placeholder="Price"
+                name="price"
+                value={price}
+                onChange={(e) => onInputChange(e)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="number"
+                placeholder="Quantity"
+                name="quantity"
+                value={quantity}
+                onChange={(e) => onInputChange(e)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <select
+                name="bookType"
+                value={bookType}
+                onChange={(e) => onInputChange(e)}
                 required
               >
                 <option value="">Seleccione Tipo</option>
-                <option value="Físico">Físico</option>
-                <option value="Virtual">Virtual</option>
+                <option value="1">Físico</option>
+                <option value="2">Virtual</option>
               </select>
             </div>
             <div className="container-button form-group">

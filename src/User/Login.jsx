@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import NavigationInit from "../Navigation/NavigationInit";
 import Swal from "sweetalert2";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   //const [userData, setUserData] = useState(null);
@@ -23,21 +23,35 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-      const response = await axios.post("http://localhost:8080/users/login", formData);
-      
-      if (response.data.success) {
+      const response = await axios.post(
+        "http://localhost:8080/users/login",
+        formData
+      );
+      console.log(response.data);
+      if (response.data) {
         Swal.fire({
           icon: "success",
           title: "Nice!",
           text: "Login success",
         });
-        localStorage.setItem("userData", JSON.stringify(response.data.user)); // Almacena los datos del usuario en el localStorage
-        navigation('/');
+
+        const userDataResponse = await axios.get(
+          `http://localhost:8080/users/get-user-by-email?email=${formData.email}`
+        );
+        if (userDataResponse.data) {
+          // Si se obtienen los datos del usuario, almacenarlos en el localStorage
+          localStorage.setItem(
+            "userData",
+            JSON.stringify(userDataResponse.data)
+          );
+        }
+
+        navigation("/");
       } else {
         console.error("Invalid email or password");
-        Swal.fire({ 
+        Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "Invalid email or password. Please try again.",
@@ -56,13 +70,13 @@ export default function Login() {
   return (
     <div className="bg-container-log">
       <NavigationInit />
-      
+
       <div>
         <div className="login-form-container">
           <img src="/logoMipaiBookstore1.png" alt="" />
-
+          <h2 className="text-center p-3 fw-semibold">Welcome!!!</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="form-group">  
               Enter your email
               <input
                 type="email"
@@ -85,8 +99,8 @@ export default function Login() {
               />
             </div>
             <div className="container-button">
-              <button className="button" type="submit">
-                Iniciar Sesión
+              <button className="button px-5" type="submit">
+                LOG IN
               </button>
             </div>
           </form>
@@ -95,7 +109,11 @@ export default function Login() {
       <div className="login-form-container">
         <span className="textmov">don't have an account?</span>
         <a href="/register">
-          <button type="submit" className="button btn-singup" style={{marginLeft:"50px"}}>
+          <button
+            type="submit"
+            className="button btn-singup"
+            style={{ marginLeft: "50px" }}
+          >
             Sing up
           </button>
         </a>
