@@ -12,11 +12,10 @@ export default function BookRegister() {
     category: "",
     quantity: "",
     bookType: "",
-    image: null,
   };
 
   const [bookData, setBookData] = useState(initialBookData);
-  //const [imagen, setImagen] = useState(null);
+  const [bookImage, setBookImagen] = useState(null);
 
   const categories = [
     "Ficción contemporánea",
@@ -32,31 +31,31 @@ export default function BookRegister() {
   ];
 
   const onInputChange = (e) => {
-    if (e.target.name === "image") {
-      const file = e.target.files[0];
-      setBookData({
-        ...bookData,
-        image: file
-      });
-    } else {
       setBookData({ ...bookData, [e.target.name]: e.target.value });
-    }
   };
 
+  const selectedHadler = e =>{
+    setBookImagen(e.target.files[0]);
+  }
 
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('bookImage', bookImage)
 
     try {
-      await axios.post("http://localhost:8080/books/save-book", bookData);
+      await axios.post("http://localhost:8080/books/save-book", bookData, formData);
       console.log(bookData);
+      console.log(formData);
       //console.log(imagen)
       Swal.fire({
         icon: "success",
         title: "¡Excelente!",
         text: "¡Registro exitoso!",
       });
+
+    
       //setBookData(initialBookData);
     } catch (error) {
       console.error("Error al guardar el libro:", error);
@@ -76,7 +75,6 @@ export default function BookRegister() {
     category,
     quantity,
     bookType,
-    image,
   } = bookData;
 
   return (
@@ -87,7 +85,7 @@ export default function BookRegister() {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => onInputChange(e)}
+            onChange={selectedHadler}
             name="image"
             required
             className="button"
