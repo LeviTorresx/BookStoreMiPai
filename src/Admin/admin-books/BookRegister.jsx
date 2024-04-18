@@ -12,7 +12,7 @@ export default function BookRegister() {
     category: "",
     quantity: "",
     bookType: "",
-    image: null,
+    bookImage: "",
   };
 
   const [bookData, setBookData] = useState(initialBookData);
@@ -32,11 +32,11 @@ export default function BookRegister() {
   ];
 
   const onInputChange = (e) => {
-    if (e.target.name === "image") {
+    if (e.target.name === "bookImage") {
       const file = e.target.files[0];
       setBookData({
         ...bookData,
-        image: file
+        bookImage: file
       });
     } else {
       setBookData({ ...bookData, [e.target.name]: e.target.value });
@@ -49,9 +49,22 @@ export default function BookRegister() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:8080/books/save-book", bookData);
-      console.log(bookData);
-      //console.log(imagen)
+      const formData = new FormData();
+      formData.append('bookName', bookData.bookName);
+      formData.append('author', bookData.author);
+      formData.append('editorial', bookData.editorial);
+      formData.append('bookDescription', bookData.bookDescription);
+      formData.append('price', bookData.price);
+      formData.append('category', bookData.category);
+      formData.append('quantity', bookData.quantity);
+      formData.append('bookType', bookData.bookType);
+      formData.append('bookImage', bookData.bookImage);
+
+    await axios.post("http://localhost:8080/books/save-book", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
       Swal.fire({
         icon: "success",
         title: "¡Excelente!",
@@ -76,7 +89,7 @@ export default function BookRegister() {
     category,
     quantity,
     bookType,
-    image,
+    bookImage,
   } = bookData;
 
   return (
@@ -88,7 +101,7 @@ export default function BookRegister() {
             type="file"
             accept="image/*"
             onChange={(e) => onInputChange(e)}
-            name="image"
+            name="bookImage"
             required
             className="button"
           />
