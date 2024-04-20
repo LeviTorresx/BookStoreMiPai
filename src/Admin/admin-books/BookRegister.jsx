@@ -50,11 +50,14 @@ export default function BookRegister() {
   const categories = [
     "Ficción contemporánea",
     "Literatura clásica",
+    "Literatura universal",
     "Ciencia ficción",
     "Fantasía",
-    "Misterio y suspense",
+    "Historia",
+    "Misterio y suspenso",
     "Romance",
-    "No ficción histórica",
+    "Política",
+    "Psicología",
     "Biografías y autobiografías",
     "Ciencia y divulgación científica",
     "Autoayuda y desarrollo personal",
@@ -208,8 +211,8 @@ export default function BookRegister() {
                 required
               >
                 <option value="">Seleccione Tipo</option>
-                <option value="1">Físico</option>
-                <option value="2">Virtual</option>
+                <option value="0">Físico</option>
+                <option value="1">Virtual</option>
               </select>
             </div>
             <div className="form-group">

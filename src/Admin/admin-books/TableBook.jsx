@@ -51,7 +51,7 @@ export default function TableBook() {
                 book.map((book, index) => (
                   <tr key={index}>
                     <th scope="row">{book.bookId}</th>
-                    <td><img src={book.bookImage} alt="img-book" width={"70px"} /></td>
+                    <td><img src={book.bookImage} alt="img-book" width={"100px"} /></td>
                     <td>{book.bookName}</td>
                     <td>{book.editorial}</td>
                     <td>{book.author}</td>
