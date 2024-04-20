@@ -5,6 +5,7 @@ import Store from "./Books/Store";
 import Register from "./User/Register";
 import ClientsTable from "./Admin/admin-users/ClientsTable";
 import BookRegister from "./Admin/admin-books/BookRegister";
+import TableBook from "./Admin/admin-books/TableBook";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/register" element={<Register/>}/>
           <Route exact path ="/admin/clientTable" element={<ClientsTable/>} />
           <Route exact path="/admin/book-register" element={<BookRegister/>}/>
+          <Route exact path="/admin/book-tableContent" element={<TableBook/>}/>
       </Routes>
     </BrowserRouter>
     </div>

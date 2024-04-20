@@ -1,9 +1,10 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function BookRegister() {
-  const initialBookData = {
+  const urlBase = "http://localhost:8080/books/save-book";
+  const [bookData, setBookData] = useState({
     bookName: "",
     author: "",
     editorial: "",
@@ -12,10 +13,39 @@ export default function BookRegister() {
     category: "",
     quantity: "",
     bookType: "",
+    bookImage: "",
+  });
+
+  // Función para manejar el cambio en los campos de entrada
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    // Si el campo de entrada es 'bookimage', obtenemos la URL de la imagen
+    if (name === "bookImage") {
+      const src = obtenerSrcDesdeHTML(value);
+      // Establecemos el valor de 'bookimage' con la URL de la imagen
+      setBookData({ ...bookData, [name]: src });
+    } else {
+      // Para otros campos, mantenemos el valor existente y solo actualizamos el campo modificado
+      setBookData({ ...bookData, [name]: value });
+    }
   };
 
-  const [bookData, setBookData] = useState(initialBookData);
-  const [bookImage, setBookImagen] = useState(null);
+  const obtenerSrcDesdeHTML = (htmlString) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, "text/html");
+
+    // Verificar si el documento parseado contiene un elemento img válido
+    if (doc && doc.body) {
+      const imgElement = doc.body.querySelector("img");
+      if (imgElement) {
+        const src = imgElement.getAttribute("src");
+        return src;
+      }
+    }
+
+    // Si no se encontró una etiqueta img o el documento es nulo, devolvemos null
+    return null;
+  };
 
   const categories = [
     "Ficción contemporánea",
@@ -30,35 +60,31 @@ export default function BookRegister() {
     "Autoayuda y desarrollo personal",
   ];
 
-  const onInputChange = (e) => {
-      setBookData({ ...bookData, [e.target.name]: e.target.value });
-  };
-
-  const selectedHadler = e =>{
-    setBookImagen(e.target.files[0]);
-  }
-
-
   const onSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('bookImage', bookImage)
 
     try {
-      await axios.post("http://localhost:8080/books/save-book", bookData, formData);
+      await axios.post( urlBase, bookData);
       console.log(bookData);
-      console.log(formData);
-      //console.log(imagen)
+      setBookData({
+        bookName: "",
+        author: "",
+        editorial: "",
+        bookDescription: "",
+        price: "",
+        category: "",
+        quantity: "",
+        bookType: "",
+        bookImage: "",
+      });
       Swal.fire({
         icon: "success",
         title: "¡Excelente!",
         text: "¡Registro exitoso!",
       });
-
-    
-      //setBookData(initialBookData);
     } catch (error) {
       console.error("Error al guardar el libro:", error);
+      console.log(bookData);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -66,6 +92,12 @@ export default function BookRegister() {
       });
     }
   };
+
+  const abrirPopup = () => {
+    // Abrir el popup con el enlace de YouTube
+    window.open("https://es.imgbb.com/", "Popup", "width=600,height=400");
+  };
+
   const {
     bookName,
     author,
@@ -75,23 +107,21 @@ export default function BookRegister() {
     category,
     quantity,
     bookType,
+    bookImage,
   } = bookData;
 
   return (
     <div className="bg-container-log">
       <div className="book-register-form-container">
-        <div className="image-upload-container">
-          <h2>Subir Imagen</h2>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={selectedHadler}
-            name="image"
-            required
-            className="button"
-          />
+        <div className="image-upload-container text-center">
+          <h2>Ingresar Image </h2>
+
+          <button className="button w-75" onClick={abrirPopup}>
+            Image
+          </button>
+          <img src={bookData.bookImage} alt="" />
         </div>
-        <div className="form-container w-50">
+        <div className="form-container w-50 mt-0">
           <h2>Registrar Libro</h2>
           <form onSubmit={onSubmit}>
             <div className="form-group w-auto">
@@ -182,6 +212,18 @@ export default function BookRegister() {
                 <option value="2">Virtual</option>
               </select>
             </div>
+            <div className="form-group">
+              <input
+                className="w-100 border border-secondary-subtle rounded-2 "
+                type="text"
+                placeholder="bookimage"
+                name="bookImage"
+                value={bookImage}
+                onChange={(e) => onInputChange(e)}
+                required
+              />
+            </div>
+            <h6 className="text-danger"> Ingresar Link HTML</h6>
             <div className="container-button form-group">
               <button className="button" type="submit">
                 Registrar Libro
