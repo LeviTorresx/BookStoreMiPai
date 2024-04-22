@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./app.css"
 import Login from "./User/Login";
-import Store from "./Books/Store";
 import Register from "./User/Register";
 import ClientsTable from "./Admin/admin-users/ClientsTable";
 import BookRegister from "./Admin/admin-books/BookRegister";
 import TableBook from "./Admin/admin-books/TableBook";
+import Store from "./Store/Store";
 
 function App() {
   return (

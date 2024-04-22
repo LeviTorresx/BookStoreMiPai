@@ -25,7 +25,7 @@ body{
   }
   
   .sidebar:hover {
-    width: 300px; /* Ancho de la barra lateral cuando el cursor está sobre ella */
+    width: 320px; /* Ancho de la barra lateral cuando el cursor está sobre ella */
     transition: 0.3s;
 
 
@@ -251,4 +251,56 @@ body{
 
   .img-book{
     width: 280px;
+  }
+
+  .fade-in {
+    animation: fadeIn ease 1s;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .btn-cart{
+    border-radius: 5px;
+    background-color: black;
+    color:white;
+  }
+
+  .btn-cart:hover{
+    transition: 0.2s;
+    color:black;
+    background-color:yellow;
+  }
+
+  .sidebar-cart {
+    z-index: 7;
+    height: 100vh;
+    width: 350px;
+    position: fixed;
+    top: 0;
+    right: -350px; /* Colocado en el lado derecho por defecto */
+    background-color: white;
+    padding-top: 50px; /* Para evitar que los elementos se superpongan al botón */
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar-cart ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-cart ul li {
+    padding: 10px;
+    color: white;
+  }
+  
+  .open {
+    right: 0; /* Mostrar el sidebar desde el lado derecho */
   }

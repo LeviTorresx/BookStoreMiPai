@@ -4,7 +4,14 @@ import { FaSearch } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Profile from "../User/Profile";
-export default function NavigationStore({ userName, userLog }) {
+import ShoppingCart from "../Store/Shopping-Cart/ShoppingCart";
+
+export default function NavigationStore({
+  userName,
+  userLog,
+  isOpen,
+  toggle,
+}) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   let navegacion = useNavigate();
@@ -43,36 +50,45 @@ export default function NavigationStore({ userName, userLog }) {
             <img src="./logoMipaiBookstoreFull.png" alt="Logo" width="150" />
           </a>
 
-          <div className="d-flex flex-grow-1">
+          <div className="d-flex flex-grow-1 mx-4 ">
             <div className="input-group">
               <input
-                className="form-control"
+                className="form-control border border-2 border-black"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button className="btn btn-light" type="submit">
+              <button
+                className="btn btn-light border border-2 border-black"
+                type="submit"
+              >
                 <FaSearch size={"20"} />
               </button>
             </div>
           </div>
           <div className="mx-3">
-            <button className="btn btn-ico mx-1" type="submit">
-            <MdOutlineShoppingCart size={'25px'}/>
+            <button className="btn btn-ico mx-1" onClick={toggle}>
+              <MdOutlineShoppingCart size={"25px"} />
             </button>
             <button
               className="btn btn-ico m-1"
               type="submit"
               onClick={handleUserClick}
             >
-              <FaRegUser size={'25px'} /> {userName}
+              <FaRegUser size={"25px"} /> {userName}
             </button>
           </div>
         </div>
       </nav>
+      <ShoppingCart isOpen={isOpen} toggle={toggle}/>
+
       {showModal && (
         <div className="z-5">
-        <Profile userName={userName} handleClose={handleClose} handleLogout={handleLogout}/>
+          <Profile
+            userName={userName}
+            handleClose={handleClose}
+            handleLogout={handleLogout}
+          />
         </div>
       )}
     </div>
