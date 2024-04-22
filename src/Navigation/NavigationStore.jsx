@@ -11,6 +11,7 @@ export default function NavigationStore({
   userLog,
   isOpen,
   toggle,
+  books
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -80,7 +81,7 @@ export default function NavigationStore({
           </div>
         </div>
       </nav>
-      <ShoppingCart isOpen={isOpen} toggle={toggle}/>
+      <ShoppingCart isOpen={isOpen} toggle={toggle} books={books}/>
 
       {showModal && (
         <div className="z-5">

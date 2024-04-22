@@ -12,6 +12,11 @@ export default function Store() {
   const [showBooks, setShowBooks] = useState(false);
   const urlBase = "http://localhost:8080/books/get-all-books";
   const [dataBooks, setDataBooks] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
+  const handleAddToCart = (updatedCartItems) => {
+    setCartItems(updatedCartItems);
+  };
 
   useEffect(() => {
     loadBook();
@@ -53,10 +58,15 @@ export default function Store() {
             userLog={true}
             isOpen={isOpen}
             toggle={toggleSidebar}
+            books={cartItems}
           />
         </div>
       ) : (
-        <NavigationStore isOpen={isOpen} toggle={toggleSidebar} />
+        <NavigationStore
+          isOpen={isOpen}
+          toggle={toggleSidebar}
+          books={cartItems}
+        />
       )}
 
       <div className="flex z-2 position-fixed">
@@ -68,6 +78,7 @@ export default function Store() {
             books={dataBooks}
             load={loading}
             showBook={showBooks}
+            onAddToCart={handleAddToCart}
           />
         </div>
       </div>

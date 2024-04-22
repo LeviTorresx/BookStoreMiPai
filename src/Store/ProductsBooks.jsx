@@ -3,13 +3,18 @@ import React, { useState} from "react";
 import Books from "./Books";
 
 
-export default function ProductsBooks( {books, load, showBook}) {
+export default function ProductsBooks( {books, load, showBook, onAddToCart}) {
   const [cartItems, setCartItems] = useState([]);
   
 
   const addToCart = (book) => {
-    setCartItems([...cartItems, book]);
-    console.log(cartItems);
+    const updatedCartItems = [...cartItems, book];
+    setCartItems(updatedCartItems);
+    console.log(updatedCartItems); // Mostrar los elementos actualizados en la consola
+    // Llamar a la función proporcionada por el padre para enviar el array actualizado
+    if (onAddToCart) {
+      onAddToCart(updatedCartItems);
+    }
   };
 
 
