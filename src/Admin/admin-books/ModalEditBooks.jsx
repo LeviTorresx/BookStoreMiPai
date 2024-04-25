@@ -44,13 +44,15 @@ export default function ModalEditBooks({ closeModal, booksId }) {
     "Autoayuda y desarrollo personal",
   ];
 
-  const onSubmit = async (e)    => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:8080/books/edit-book?bookId=?${booksId}`,
+        `http://localhost:8080/books/edit-book?bookId=${booksId}`,
         book
       );
+
+      loadsBook();
     } catch (error) {
       console.error("Error al guardar el libro:", error);
     }
@@ -63,8 +65,22 @@ export default function ModalEditBooks({ closeModal, booksId }) {
   const loadsBook = async () => {
     try {
       const response = await axios.get(`${urlBase}?bookId=${booksId}`);
-      const responseData = response.data; // Extrayendo los datos del libro de la respuesta
-      setBook(responseData);
+
+      let typeCode;
+      if (response.data.bookType === "PHYSICAL") {
+        typeCode = 0;
+      } else if (response.data.bookType === "DIGITAL") {
+        typeCode = 1;
+      } else {
+        console.log("type null");
+      }
+
+      const bookData = {
+        ...response.data,
+        bookType: typeCode,
+      };
+
+      setBook(bookData);
     } catch (error) {
       console.error("Error al cargar el libro:", error);
     }
@@ -170,6 +186,18 @@ export default function ModalEditBooks({ closeModal, booksId }) {
                         onChange={(e) => onInputChange(e)}
                         required
                       />
+                    </div>
+                    <div className="form-group">
+                      <select
+                        name="bookType"
+                        value={bookType}
+                        onChange={(e) => onInputChange(e)}
+                        required
+                      >
+                        <option value="">Seleccione Tipo</option>
+                        <option value="0">Físico</option>
+                        <option value="1">Virtual</option>
+                      </select>
                     </div>
                   </form>
                 </div>

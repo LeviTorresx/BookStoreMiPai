@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ModalEditBooks from "./ModalEditBooks";
+import SearchBook from "./SearchBook";
 
 export default function TableBook() {
   const urlBase = "http://localhost:8080/books/get-all-books";
@@ -43,6 +44,9 @@ export default function TableBook() {
 
   return (
     <div>
+      <div>
+        <SearchBook />
+      </div>
       <div className="containers text-center" style={{ margin: "30px" }}>
         <h3>Books Table</h3>
       </div>

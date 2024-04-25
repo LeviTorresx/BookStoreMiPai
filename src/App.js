@@ -8,14 +8,13 @@ import TableBook from "./Admin/admin-books/TableBook";
 import Store from "./Store/Store";
 import SideBar from "./Admin/NavigationAdmin/SideBarAdmin";
 
-
 const isUserAuthenticated = () => {
   return localStorage.getItem("isLoggedIn") === "true";
 };
 
 const isUserAdmin = () => {
-  const userData = JSON.parse(localStorage.getItem("userData")); 
-  return userData && userData.userType === "ADMINISTRATOR"; 
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  return userData && userData.userType === "ADMINISTRATOR";
 };
 
 const AdminRoute = ({ element: Element, ...rest }) => {
@@ -38,7 +37,6 @@ const ProtectedRoute = ({ element: Element, ...rest }) => {
 };
 
 function App() {
-
   return (
     <div>
       <BrowserRouter>
@@ -54,20 +52,13 @@ function App() {
             path="/register"
             element={<ProtectedRoute element={<Register />} />}
           />
-          <Route
-            exact
-            path="/admin/clientTable"
-            element={<AdminRoute element={<ClientsTable />} />}
-          />
-          <Route
-            exact
-            path="/admin/book-register"
-            element={<AdminRoute element={<BookRegister />} />}
-          />
+
+          <Route exact path="/admin/clientTable" element={<ClientsTable />} />
+          <Route exact path="/admin/book-register" element={<BookRegister />} />
           <Route
             exact
             path="/admin/book-tableContent"
-            element={<AdminRoute element={<TableBook />} />}
+            element={<TableBook />}
           />
         </Routes>
       </BrowserRouter>

@@ -316,8 +316,8 @@ body{
   }
 
   .edit{
-    background-color: orangered;
-    color: white;
+    background-color: yellow;
+    color: black;
   }
 
   .edit:hover{
