@@ -46,6 +46,7 @@ export default function Login() {
             "userData",
             JSON.stringify(userDataResponse.data)
           );
+          localStorage.setItem("isLoggedIn", "true");
         }
 
         navigation("/");

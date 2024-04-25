@@ -304,3 +304,22 @@ body{
   .open {
     right: 0; /* Mostrar el sidebar desde el lado derecho */
   }
+
+  .delete{
+    background-color: red;
+    opacity: 2;
+    color: white;
+  }
+
+  .delete:hover{
+    background-color: darkred;
+  }
+
+  .edit{
+    background-color: orangered;
+    color: white;
+  }
+
+  .edit:hover{
+    background-color: orange;
+  }
