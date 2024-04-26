@@ -27,8 +27,6 @@ body{
   .sidebar:hover {
     width: 320px; /* Ancho de la barra lateral cuando el cursor está sobre ella */
     transition: 0.3s;
-
-
   }
   
   .sidebar ul {
@@ -71,10 +69,10 @@ body{
     transition:opacity 1s ease-out ;
   }
 
-.sidebar:hover li {
-  color: #64B133;
-  transition: 0.2s;
-}
+  .sidebar:hover li {
+    color: #64B133;
+    transition: 0.2s;
+  }
   
   .sidebar ul li:hover {
     margin-left: 20px;
@@ -85,6 +83,79 @@ body{
   }
 
   .sidebar ul li:hover a {
+    color: #64B133;
+    transition: 0.5s;
+  }
+
+  .sidebar-admin{
+    width: 70px; /* Ancho de la barra lateral cuando está contraída */
+    height: 100vh;
+    position: initial;
+    padding-top: 15px;
+    background: gray;
+    transition: width 0.5s; /* Transición suave para el cambio de ancho */
+    transition: 0.3s ease-out;
+  }
+
+  .sidebar-admin:hover {
+    width: 320px; /* Ancho de la barra lateral cuando el cursor está sobre ella */
+    transition: 0.3s;
+  }
+  
+  .sidebar-admin ul {
+    list-style-type: none;
+    padding: 0;
+    position: fixed;
+
+  }
+  
+  .sidebar-admin ul li {
+    padding: 20px;
+    color: white; /* Color del texto de los elementos */
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar-admin ul li a {
+    color: black;
+    text-decoration: none;
+  }
+
+  .sidebar-admin:hover a{
+    color: #07060E;
+    transition: 0.3s;
+  }
+
+  .sidebar-admin ul li a span{
+    display: none;
+    padding-left: 40px;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    font-size: larger;
+    font-weight: bold;
+    color: black;
+  }
+
+  .sidebar-admin:hover span {
+    display: inline-block;
+    opacity: 1;
+    transition:opacity 1s ease-out ;
+  }
+
+  .sidebar-admin:hover li {
+    color: #64B133;
+    transition: 0.2s;
+  }
+  
+  .sidebar-admin ul li:hover {
+    margin-left: 20px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #9E7B68; /* Color de fondo al pasar el mouse sobre los elementos */
+    transition: 0.3s;
+  }
+
+  .sidebar-admin ul li:hover a {
     color: #64B133;
     transition: 0.5s;
   }
@@ -322,4 +393,8 @@ body{
 
   .edit:hover{
     background-color: orange;
+  }
+
+  .bg-admin{
+    background-color: #07060E;
   }

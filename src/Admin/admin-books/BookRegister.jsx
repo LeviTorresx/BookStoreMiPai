@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Home from "../../Navigation/Home";
 
 export default function BookRegister() {
   const urlBase = "http://localhost:8080/books/save-book";
@@ -115,7 +116,11 @@ export default function BookRegister() {
 
   return (
     <div className="bg-container-log">
+      <div>
+        <Home/>
+      </div>
       <div className="book-register-form-container">
+
         <div className="image-upload-container text-center">
           <h2>Ingresar Image </h2>
 

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ModalEditBooks from "./ModalEditBooks";
 import SearchBook from "./SearchBook";
+import SideBar from "../NavigationAdmin/SideBarAdmin";
+import Home from "../../Navigation/Home";
 
 export default function TableBook() {
   const urlBase = "http://localhost:8080/books/get-all-books";
@@ -22,10 +24,10 @@ export default function TableBook() {
     }
   };
 
-  const deleteBook = async (Id) =>{
+  const deleteBook = async (Id) => {
     alert("chupas");
     //await axios.delete("  ")
-    
+
   };
 
   const openModal = () => {
@@ -44,11 +46,23 @@ export default function TableBook() {
 
   return (
     <div>
-      <div>
-        <SearchBook />
+      <div className="flex z-2 position-fixed">
+        <SideBar/>
       </div>
-      <div className="containers text-center" style={{ margin: "30px" }}>
-        <h3>Books Table</h3>
+      <div>
+        <div className="d-flex justify-content-between align-items-center">
+          <div>
+            <Home/>
+          </div>
+          <div className="ps-5">
+            <h3>Books Table</h3>
+          </div>
+          <div>
+            <SearchBook />
+          </div>
+        </div>
+      </div>
+      <div className="containers text-center" style={{ margin: "10px" }}>
       </div>
       <div className="container">
         <table className="table table-striped table-table-hover align-middle">
