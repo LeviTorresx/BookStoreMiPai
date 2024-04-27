@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SearchBook() {
+export default function SearchUser() {
   return (
     <div>
       <nav className="navbar bg-body">
