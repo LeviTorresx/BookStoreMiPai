@@ -1,5 +1,3 @@
-
-
 export default function ElementsCart({ books }) {
   return (
     <div>
@@ -7,7 +5,10 @@ export default function ElementsCart({ books }) {
         {/* Utiliza map para recorrer la lista de libros y renderizar cada uno */}
         {books.map((book, index) => (
           <li className="text-black" key={index}>
-            {book.bookName}
+            <div>
+              <img src={book.bookImage} alt="books" width={"70px"} />
+              {book.bookName}
+            </div>
           </li>
         ))}
       </ul>

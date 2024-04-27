@@ -5,8 +5,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  //const [userData, setUserData] = useState(null);
-  const navigation = useNavigate();
+  let navigation = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -40,16 +39,19 @@ export default function Login() {
         const userDataResponse = await axios.get(
           `http://localhost:8080/users/get-user-by-email?email=${formData.email}`
         );
+
         if (userDataResponse.data) {
-          // Si se obtienen los datos del usuario, almacenarlos en el localStorage
           localStorage.setItem(
             "userData",
             JSON.stringify(userDataResponse.data)
           );
-          localStorage.setItem("isLoggedIn", "true");
-        }
 
-        navigation("/");
+          if (localStorage.getItem("userType") === "ADMINISTRATOR") {
+            navigation("/admin/book-tableContent");
+          } else {
+            navigation("/");
+          }
+        }
       } else {
         console.error("Invalid email or password");
         Swal.fire({
@@ -77,7 +79,7 @@ export default function Login() {
           <img src="/logoMipaiBookstore1.png" alt="" />
           <h2 className="text-center p-3 fw-semibold">Welcome!!!</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">  
+            <div className="form-group">
               Enter your email
               <input
                 type="email"

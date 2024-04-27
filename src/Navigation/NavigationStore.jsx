@@ -11,7 +11,7 @@ export default function NavigationStore({
   userLog,
   isOpen,
   toggle,
-  books
+  books,
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -28,7 +28,6 @@ export default function NavigationStore({
     setShowModal(false); // Cierra el modal
     // Opcional: redirige al usuario a la página de inicio o donde desees después de cerrar sesión
     window.location.reload();
-    localStorage.setItem("isLoggedIn", "false");
   };
 
   useEffect(() => {
@@ -82,7 +81,7 @@ export default function NavigationStore({
           </div>
         </div>
       </nav>
-      <ShoppingCart isOpen={isOpen} toggle={toggle} books={books}/>
+      <ShoppingCart isOpen={isOpen} toggle={toggle} books={books} />
 
       {showModal && (
         <div className="z-5">
