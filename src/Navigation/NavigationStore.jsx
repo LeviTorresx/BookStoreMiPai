@@ -12,6 +12,9 @@ export default function NavigationStore({
   isOpen,
   toggle,
   books,
+  handleRemoveFromCart,
+  handleIncreaseQuantity,
+  handleDecreaseQuantity,
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -81,7 +84,14 @@ export default function NavigationStore({
           </div>
         </div>
       </nav>
-      <ShoppingCart isOpen={isOpen} toggle={toggle} books={books} />
+      <ShoppingCart
+        isOpen={isOpen}
+        toggle={toggle}
+        books={books}
+        handleDecreaseQuantity={handleDecreaseQuantity}
+        handleIncreaseQuantity={handleIncreaseQuantity}
+        handleRemoveFromCart={handleRemoveFromCart}
+      />
 
       {showModal && (
         <div className="z-5">

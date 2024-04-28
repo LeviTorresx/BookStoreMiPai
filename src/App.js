@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./app.css";
 import Login from "./User/Login";
 import Register from "./User/Register";
@@ -9,19 +9,15 @@ import Store from "./Store/Store";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { useLocalStorage } from "react-use";
 import ProtectedRouteAdmin from "./utils/protectedRouteAdmin";
-import AdminLayout from "./utils/AdminLayout";
 
 function App() {
   const [user, setUser] = useLocalStorage("userData");
-
-  const userAdmin = () => {
-    return user && user.userType === "ADMINISTRATOR";
-  };
 
   return (
     <div>
       <BrowserRouter>
         <Routes>
+          
           <Route exact path="/" element={<Store />} />
 
           <Route element={<ProtectedRoute canActivate={user} redirect={"/"} />}>

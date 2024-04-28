@@ -10,7 +10,7 @@ export default function Footer() {
         <div>
           <h4 className="fw-bold"> Our company</h4>
           <h5>
-            <a href="/">About us</a>
+            <a href="https://github.com/LeviTorresx">About us</a>
           </h5>
         </div>
         <div>

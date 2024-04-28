@@ -14,7 +14,39 @@ export default function Store() {
   const [dataBooks, setDataBooks] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  const handleAddToCart = (updatedCartItems) => {
+  const handleAddToCart = (book) => {
+    const existingBook = cartItems.find((item) => item.bookId === book.bookId);
+    if (existingBook) {
+      const updatedCartItems = cartItems.map((item) =>
+        item.bookId === book.bookId
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      setCartItems(updatedCartItems);
+    } else {
+      setCartItems([...cartItems, { ...book, quantity: 1 }]);
+      console.log(cartItems);
+    }
+  };
+
+  const handleRemoveFromCart = (book) => {
+    const updatedCartItems = cartItems.filter((item) => item.bookId !== book.bookId);
+    setCartItems(updatedCartItems);
+  };
+
+  const handleIncreaseQuantity = (book) => {
+    const updatedCartItems = cartItems.map((item) =>
+      item.bookId === book.bookId ? { ...item, quantity: item.quantity + 1 } : item
+    );
+    setCartItems(updatedCartItems);
+  };
+
+  const handleDecreaseQuantity = (book) => {
+    const updatedCartItems = cartItems.map((item) =>
+      item.bookId === book.bookId && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
     setCartItems(updatedCartItems);
   };
 
@@ -25,8 +57,6 @@ export default function Store() {
   const loadBook = async () => {
     try {
       const result = await axios.get(urlBase);
-      console.log("result of load book");
-      console.log(result.data);
       setDataBooks(result.data);
       setLoading(false);
       setShowBooks(true);
@@ -59,6 +89,9 @@ export default function Store() {
             isOpen={isOpen}
             toggle={toggleSidebar}
             books={cartItems}
+            handleDecreaseQuantity={handleDecreaseQuantity}
+            handleRemoveFromCart={handleRemoveFromCart}
+            handleIncreaseQuantity={handleIncreaseQuantity}
           />
         </div>
       ) : (
@@ -66,6 +99,9 @@ export default function Store() {
           isOpen={isOpen}
           toggle={toggleSidebar}
           books={cartItems}
+          handleDecreaseQuantity={handleDecreaseQuantity}
+          handleRemoveFromCart={handleRemoveFromCart}
+          handleIncreaseQuantity={handleIncreaseQuantity}
         />
       )}
 

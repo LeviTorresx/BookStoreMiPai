@@ -1,16 +1,31 @@
-export default function ElementsCart({ books }) {
+import React from "react";
+
+export default function ElementsCart({
+  book,
+  handleRemoveFromCart,
+  handleIncreaseQuantity,
+  handleDecreaseQuantity,
+}) {
   return (
     <div>
-      <ul>
-        {/* Utiliza map para recorrer la lista de libros y renderizar cada uno */}
-        {books.map((book, index) => (
-          <li className="text-black" key={index}>
-            <div>
-              <img src={book.bookImage} alt="books" width={"70px"} />
-              {book.bookName}
+      <ul className="px-3 py-1">
+        <li className="text-black border border-2 border-black rounded p-2">
+          <div className="flex">
+            <div className="p-1"> 
+              <img src={book.bookImage} alt="books" width={"100px"} />
             </div>
-          </li>
-        ))}
+            <div>
+              <h5 className="m-2">{book.bookName}</h5>
+              <span> - ${book.price}</span>
+              <span> - Quantity: {book.quantity}</span>
+            </div>
+          </div>
+          <div>
+            <button className="" onClick={() => handleIncreaseQuantity(book)}> + </button>
+            <button className="" onClick={() => handleDecreaseQuantity(book)}> - </button>
+            <button className="" onClick={() => handleRemoveFromCart(book)}> Delete </button>
+          </div>
+        </li>
       </ul>
     </div>
   );
