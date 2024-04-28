@@ -46,11 +46,7 @@ export default function Login() {
             JSON.stringify(userDataResponse.data)
           );
 
-          if (localStorage.getItem("userType") === "ADMINISTRATOR") {
-            navigation("/admin/book-tableContent");
-          } else {
-            navigation("/");
-          }
+          navigation("/");
         }
       } else {
         console.error("Invalid email or password");

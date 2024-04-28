@@ -4,6 +4,7 @@ import SideBar from "../Navigation/SideBar";
 import ProductsBooks from "./ProductsBooks";
 import Footer from "../Navigation/Footer";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Store() {
   const [userData, setUserData] = useState(null);
@@ -13,6 +14,7 @@ export default function Store() {
   const urlBase = "http://localhost:8080/books/get-all-books";
   const [dataBooks, setDataBooks] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  let navigation = useNavigate();
 
   const handleAddToCart = (book) => {
     const existingBook = cartItems.find((item) => item.bookId === book.bookId);
@@ -25,18 +27,21 @@ export default function Store() {
       setCartItems(updatedCartItems);
     } else {
       setCartItems([...cartItems, { ...book, quantity: 1 }]);
-      console.log(cartItems);
     }
   };
 
   const handleRemoveFromCart = (book) => {
-    const updatedCartItems = cartItems.filter((item) => item.bookId !== book.bookId);
+    const updatedCartItems = cartItems.filter(
+      (item) => item.bookId !== book.bookId
+    );
     setCartItems(updatedCartItems);
   };
 
   const handleIncreaseQuantity = (book) => {
     const updatedCartItems = cartItems.map((item) =>
-      item.bookId === book.bookId ? { ...item, quantity: item.quantity + 1 } : item
+      item.bookId === book.bookId
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
     );
     setCartItems(updatedCartItems);
   };
@@ -73,7 +78,6 @@ export default function Store() {
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
-    console.log("Datos almacenados en localStorage:", storedUserData);
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
     }
