@@ -278,6 +278,13 @@ body{
     background-color: #64B133;
   }
 
+  .btn-shopping-cart{
+    color: #000;
+    height: 25px;
+    border: none;
+    background: transparent;
+  }
+
   .book-register-form-container {
     display: flex;
     align-items: center;
@@ -352,10 +359,10 @@ body{
   .sidebar-cart {
     z-index: 7;
     height: 100vh;
-    width: 350px;
+    width: 400px;
     position: fixed;
     top: 0;
-    right: -350px; /* Colocado en el lado derecho por defecto */
+    right: -400px; /* Colocado en el lado derecho por defecto */
     background-color: white;
     padding-top: 50px; /* Para evitar que los elementos se superpongan al botón */
     transition: all 0.3s ease;
