@@ -67,7 +67,7 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-container-log">
+    <div className="bg-login">
       <NavigationInit />
 
       <div>

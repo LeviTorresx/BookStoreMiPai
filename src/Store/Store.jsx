@@ -14,6 +14,7 @@ export default function Store() {
   const urlBase = "http://localhost:8080/books/get-all-books";
   const [dataBooks, setDataBooks] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [countBooks, setCountBooks] = useState(0);
   let navigation = useNavigate();
 
   const handleAddToCart = (book) => {
@@ -28,6 +29,9 @@ export default function Store() {
     } else {
       setCartItems([...cartItems, { ...book, quantity: 1 }]);
     }
+
+    setCountBooks(cartItems.length);
+    console.log(countBooks);
   };
 
   const handleRemoveFromCart = (book) => {
@@ -96,6 +100,7 @@ export default function Store() {
             handleDecreaseQuantity={handleDecreaseQuantity}
             handleRemoveFromCart={handleRemoveFromCart}
             handleIncreaseQuantity={handleIncreaseQuantity}
+            count={countBooks}
           />
         </div>
       ) : (
@@ -106,6 +111,7 @@ export default function Store() {
           handleDecreaseQuantity={handleDecreaseQuantity}
           handleRemoveFromCart={handleRemoveFromCart}
           handleIncreaseQuantity={handleIncreaseQuantity}
+          count={countBooks}
         />
       )}
 

@@ -82,13 +82,13 @@ export default function Register() {
 
   return (
     <div>
-      <div className="bg-container-log">
+      <div className="bg-login">
         <NavigationInit />
         <div className="flex justify-content-center">
           <div className="p-5">
             <div className="p-5">
             <img src="./logoMipaiBookstore1.png" alt="" width={"300px"} />
-            <h2 className="fw-semibold text-center">Are you new here?</h2>
+            <h2 className="fw-semibold text-center" style={{color: "black"}}> Are you new here?</h2>
             </div>
           </div>
           <div className="register-form-container w-50">
@@ -148,7 +148,7 @@ export default function Register() {
                 className="additional-info-toggle container-button"
                 onClick={toggleAdditionalInfo}
               >
-                {user.showAdditionalInfo ? "-" : "+"} Información Adicional
+                {user.showAdditionalInfo ? "-" : "+"} Additional information
               </div>
               {user.showAdditionalInfo && (
                 <>
@@ -166,7 +166,7 @@ export default function Register() {
               )}
               <div className="container-button">
                 <button className="button" type="submit">
-                  Registrarse
+                  Sign in
                 </button>
               </div>
             </form>

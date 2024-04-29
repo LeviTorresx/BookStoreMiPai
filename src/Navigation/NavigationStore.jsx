@@ -15,6 +15,7 @@ export default function NavigationStore({
   handleRemoveFromCart,
   handleIncreaseQuantity,
   handleDecreaseQuantity,
+  count,
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -72,7 +73,14 @@ export default function NavigationStore({
           </div>
           <div className="mx-3">
             <button className="btn btn-ico mx-1" onClick={toggle}>
-              <MdOutlineShoppingCart size={"25px"} />
+              <div style={{ position: "relative"}}>
+                <MdOutlineShoppingCart size={"25px"} />
+                {count > 0 && (
+                  <div className="cart-count">
+                  {count}
+                  </div>
+                )}
+              </div>
             </button>
             <button
               className="btn btn-ico m-1"

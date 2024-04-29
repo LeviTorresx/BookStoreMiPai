@@ -1,407 +1,447 @@
-
-
-body{
+body {
   font-family: 'Poppins', sans-serif;
 }
 
 
-  .bg-container-log{
-    height: 100vh;
-    background: linear-gradient(to bottom right, #B6CCD7, #FAA591);
-  }
+.bg-container-log {
+  height: 100vh;
+  background: linear-gradient(to bottom right, #B6CCD7, #FAA591);
+}
 
-  .flex{
-    display: flex;
-  }
+.bg-login {
+  background-image: url('/public/loginCapybara.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+  position: relative;
+  height: 100vh;
+}
 
-  .sidebar {
-    width: 70px; /* Ancho de la barra lateral cuando está contraída */
-    height: 100vh;
-    position: initial;
-    padding-top: 100px; /* Espaciado superior */
-    background: gray;
-    transition: width 0.5s; /* Transición suave para el cambio de ancho */
-    transition: 0.3s ease-out;
-  }
-  
-  .sidebar:hover {
-    width: 320px; /* Ancho de la barra lateral cuando el cursor está sobre ella */
-    transition: 0.3s;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-    position: fixed;
+.cart-count {
+  position: "absolute";
+  top: "-8px";
+  right: "-8px";
+  background-color: "red";
+  color: "white";
+  border-radius: "50%";
+  width: "20px";
+  height: "20px";
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+  font-size: "14px";
+}
 
-  }
-  
-  .sidebar ul li {
-    padding: 20px;
-    color: white; /* Color del texto de los elementos */
-    display: flex;
-    align-items: center;
-  }
-  
-  .sidebar ul li a {
-    color: black;
-    text-decoration: none;
-  }
+.flex {
+  display: flex;
+}
 
-  .sidebar:hover a{
-    color: #07060E;
-    transition: 0.3s;
-  }
+.sidebar {
+  width: 70px;
+  /* Ancho de la barra lateral cuando está contraída */
+  height: 100vh;
+  position: initial;
+  padding-top: 100px;
+  /* Espaciado superior */
+  background: gray;
+  transition: width 0.5s;
+  /* Transición suave para el cambio de ancho */
+  transition: 0.3s ease-out;
+}
 
-  .sidebar ul li a span{
-    display: none;
-    padding-left: 40px;
+.sidebar:hover {
+  width: 320px;
+  /* Ancho de la barra lateral cuando el cursor está sobre ella */
+  transition: 0.3s;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  position: fixed;
+
+}
+
+.sidebar ul li {
+  padding: 20px;
+  color: white;
+  /* Color del texto de los elementos */
+  display: flex;
+  align-items: center;
+}
+
+.sidebar ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+.sidebar:hover a {
+  color: #07060E;
+  transition: 0.3s;
+}
+
+.sidebar ul li a span {
+  display: none;
+  padding-left: 40px;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+  font-size: larger;
+  font-weight: bold;
+  color: black;
+}
+
+.sidebar:hover span {
+  display: inline-block;
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.sidebar:hover li {
+  color: #64B133;
+  transition: 0.2s;
+}
+
+.sidebar ul li:hover {
+  margin-left: 20px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #9E7B68;
+  /* Color de fondo al pasar el mouse sobre los elementos */
+  transition: 0.3s;
+}
+
+.sidebar ul li:hover a {
+  color: #64B133;
+  transition: 0.5s;
+}
+
+.sidebar-admin {
+  width: 70px;
+  /* Ancho de la barra lateral cuando está contraída */
+  height: 100vh;
+  position: initial;
+  padding-top: 15px;
+  background: gray;
+  transition: width 0.5s;
+  /* Transición suave para el cambio de ancho */
+  transition: 0.3s ease-out;
+}
+
+.sidebar-admin:hover {
+  width: 320px;
+  /* Ancho de la barra lateral cuando el cursor está sobre ella */
+  transition: 0.3s;
+}
+
+.sidebar-admin ul {
+  list-style-type: none;
+  padding: 0;
+  position: fixed;
+
+}
+
+.sidebar-admin ul li {
+  padding: 20px;
+  color: white;
+  /* Color del texto de los elementos */
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-admin ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+.sidebar-admin:hover a {
+  color: #07060E;
+  transition: 0.3s;
+}
+
+.sidebar-admin ul li a span {
+  display: none;
+  padding-left: 40px;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+  font-size: larger;
+  font-weight: bold;
+  color: black;
+}
+
+.sidebar-admin:hover span {
+  display: inline-block;
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.sidebar-admin:hover li {
+  color: #64B133;
+  transition: 0.2s;
+}
+
+.sidebar-admin ul li:hover {
+  margin-left: 20px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #9E7B68;
+  /* Color de fondo al pasar el mouse sobre los elementos */
+  transition: 0.3s;
+}
+
+.sidebar-admin ul li:hover a {
+  color: #64B133;
+  transition: 0.5s;
+}
+
+.btn-ico {
+  border-radius: 5px;
+  background-color: #fff;
+  color: #07060E;
+}
+
+.btn-ico:hover {
+  transition: 0.2s;
+  color: white;
+  background-color: #07060E;
+}
+
+.content {
+  padding-left: 85px;
+  padding-top: 100px;
+  margin-right: 10px;
+}
+
+.content-footer {
+  padding-left: 85px;
+  margin-right: 10px;
+}
+
+.img-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.register-form-container {
+  max-width: 500px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 50px;
+  font-size: 20px;
+}
+
+.img-container {
+  max-width: 400px;
+  /* Ajusta el ancho de la imagen según tus necesidades */
+}
+
+.img-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 15p;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.additional-info-toggle {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.login-form-container {
+
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.login-form-container img {
+  padding-left: 100px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.container-button {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  background-color: #B6CCD7;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #07060E;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+
+}
+
+.button:hover {
+  background-color: #64B133;
+}
+
+.btn-shopping-cart {
+  color: #000;
+  height: 25px;
+  border: none;
+  background: transparent;
+}
+
+.book-register-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.form-container,
+.image-upload-container {
+  max-width: 4 00px;
+  margin: 0 20px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.form-container h2,
+.image-upload-container h2 {
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.image-preview img {
+  max-width: 300px;
+  height: auto;
+  margin: 10px;
+  padding: 20px;
+}
+
+.img-book {
+  width: 280px;
+}
+
+.fade-in {
+  animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+  0% {
     opacity: 0;
-    transition: opacity 1s ease-in;
-    font-size: larger;
-    font-weight: bold;
-    color: black;
   }
 
-  .sidebar:hover span {
-    display: inline-block;
+  100% {
     opacity: 1;
-    transition:opacity 1s ease-out ;
   }
+}
 
-  .sidebar:hover li {
-    color: #64B133;
-    transition: 0.2s;
-  }
-  
-  .sidebar ul li:hover {
-    margin-left: 20px;
-    width: 100%;
-    border-radius: 10px;
-    background-color: #9E7B68; /* Color de fondo al pasar el mouse sobre los elementos */
-    transition: 0.3s;
-  }
+.btn-cart {
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+}
 
-  .sidebar ul li:hover a {
-    color: #64B133;
-    transition: 0.5s;
-  }
+.btn-cart:hover {
+  transition: 0.2s;
+  color: black;
+  background-color: yellow;
+}
 
-  .sidebar-admin{
-    width: 70px; /* Ancho de la barra lateral cuando está contraída */
-    height: 100vh;
-    position: initial;
-    padding-top: 15px;
-    background: gray;
-    transition: width 0.5s; /* Transición suave para el cambio de ancho */
-    transition: 0.3s ease-out;
-  }
+.sidebar-cart {
+  z-index: 7;
+  height: 100vh;
+  width: 400px;
+  position: fixed;
+  top: 0;
+  right: -400px;
+  /* Colocado en el lado derecho por defecto */
+  background-color: white;
+  padding-top: 50px;
+  /* Para evitar que los elementos se superpongan al botón */
+  transition: all 0.3s ease;
+}
 
-  .sidebar-admin:hover {
-    width: 320px; /* Ancho de la barra lateral cuando el cursor está sobre ella */
-    transition: 0.3s;
-  }
-  
-  .sidebar-admin ul {
-    list-style-type: none;
-    padding: 0;
-    position: fixed;
+.sidebar-cart ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-  }
-  
-  .sidebar-admin ul li {
-    padding: 20px;
-    color: white; /* Color del texto de los elementos */
-    display: flex;
-    align-items: center;
-  }
-  
-  .sidebar-admin ul li a {
-    color: black;
-    text-decoration: none;
-  }
+.sidebar-cart ul li {
+  padding: 10px;
+  color: white;
+}
 
-  .sidebar-admin:hover a{
-    color: #07060E;
-    transition: 0.3s;
-  }
+.open {
+  right: 0;
+  /* Mostrar el sidebar desde el lado derecho */
+}
 
-  .sidebar-admin ul li a span{
-    display: none;
-    padding-left: 40px;
-    opacity: 0;
-    transition: opacity 1s ease-in;
-    font-size: larger;
-    font-weight: bold;
-    color: black;
-  }
+.delete {
+  background-color: red;
+  opacity: 2;
+  color: white;
+}
 
-  .sidebar-admin:hover span {
-    display: inline-block;
-    opacity: 1;
-    transition:opacity 1s ease-out ;
-  }
+.delete:hover {
+  background-color: darkred;
+}
 
-  .sidebar-admin:hover li {
-    color: #64B133;
-    transition: 0.2s;
-  }
-  
-  .sidebar-admin ul li:hover {
-    margin-left: 20px;
-    width: 100%;
-    border-radius: 10px;
-    background-color: #9E7B68; /* Color de fondo al pasar el mouse sobre los elementos */
-    transition: 0.3s;
-  }
+.edit {
+  background-color: yellow;
+  color: black;
+}
 
-  .sidebar-admin ul li:hover a {
-    color: #64B133;
-    transition: 0.5s;
-  }
+.edit:hover {
+  background-color: orange;
+}
 
-  .btn-ico{
-    border-radius: 5px;
-    background-color: #fff;
-    color: #07060E;
-  }
-
-  .btn-ico:hover{
-    transition: 0.2s;
-    color:white;
-    background-color:#07060E;
-  }
-
-  .content {
-    padding-left: 85px;
-    padding-top: 100px;
-    margin-right: 10px;
-  }
-  .content-footer {
-    padding-left: 85px;
-    margin-right: 10px;
-  }
-
-  .img-container img {
-    max-width: 100%;
-    height: auto;
-  } 
-
-  .register-form-container {
-    max-width: 500px;
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 50px;
-    font-size: 20px;
-  }
-
-  .img-container {
-    max-width: 400px; /* Ajusta el ancho de la imagen según tus necesidades */
-  }
-  
-  .img-container img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .container{
-    display: flex;
-    align-items: center;
-  }
-  
-  .form-group {
-    margin-bottom: 15p;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="tel"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .additional-info-toggle {
-    margin-bottom: 10px;
-    cursor: pointer;
-  } 
-  
-  .login-form-container {
-
-    max-width: 500px;
-    margin: 0 auto;
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
-  }
-  .login-form-container img{
-    padding-left: 100px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-
-  .container-button{
-    display: flex;
-    justify-content: center;
-  }
-  
-  .button {
-    background-color: #B6CCD7;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #07060E;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
-
-  }
-  
-  .button:hover {
-    background-color: #64B133;
-  }
-
-  .btn-shopping-cart{
-    color: #000;
-    height: 25px;
-    border: none;
-    background: transparent;
-  }
-
-  .book-register-form-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 30px;
-  }
-  
-  .form-container,
-  .image-upload-container {
-    max-width: 4  00px;
-    margin: 0 20px;
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-  }
-  
-  .form-container h2,
-  .image-upload-container h2 {
-    margin-bottom: 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-
-  .image-preview img {
-    max-width: 300px;
-    height: auto;
-    margin: 10px;
-    padding: 20px;
-  }
-
-  .img-book{
-    width: 280px;
-  }
-
-  .fade-in {
-    animation: fadeIn ease 1s;
-  }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  .btn-cart{
-    border-radius: 5px;
-    background-color: black;
-    color:white;
-  }
-
-  .btn-cart:hover{
-    transition: 0.2s;
-    color:black;
-    background-color:yellow;
-  }
-
-  .sidebar-cart {
-    z-index: 7;
-    height: 100vh;
-    width: 400px;
-    position: fixed;
-    top: 0;
-    right: -400px; /* Colocado en el lado derecho por defecto */
-    background-color: white;
-    padding-top: 50px; /* Para evitar que los elementos se superpongan al botón */
-    transition: all 0.3s ease;
-  }
-  
-  .sidebar-cart ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sidebar-cart ul li {
-    padding: 10px;
-    color: white;
-  }
-  
-  .open {
-    right: 0; /* Mostrar el sidebar desde el lado derecho */
-  }
-
-  .delete{
-    background-color: red;
-    opacity: 2;
-    color: white;
-  }
-
-  .delete:hover{
-    background-color: darkred;
-  }
-
-  .edit{
-    background-color: yellow;
-    color: black;
-  }
-
-  .edit:hover{
-    background-color: orange;
-  }
-
-  .bg-admin{
-    background-color: #07060E;
-  }
+.bg-admin {
+  background-color: #07060E;
+}
