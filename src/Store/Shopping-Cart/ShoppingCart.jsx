@@ -27,12 +27,15 @@ export default function ShoppingCart({
                 />
               ))}
             </div>
-            <button className="button" onClick={toggle}>
+            <div className="pt-4">
+               <button className="button" onClick={toggle}>
               Close
             </button>
             <button className="button" onClick={toggle}>
               Buy
             </button>
+            </div>
+           
           </div>
         </div>
       </div>

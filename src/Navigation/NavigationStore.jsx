@@ -72,14 +72,11 @@ export default function NavigationStore({
             </div>
           </div>
           <div className="mx-3">
+            
             <button className="btn btn-ico mx-1" onClick={toggle}>
-              <div style={{ position: "relative"}}>
+              <div style={{ position: "relative" }}>
+                {count > 0 && <div className="cart-count">{count}</div>}
                 <MdOutlineShoppingCart size={"25px"} />
-                {count > 0 && (
-                  <div className="cart-count">
-                  {count}
-                  </div>
-                )}
               </div>
             </button>
             <button

@@ -4,7 +4,6 @@ import SideBar from "../Navigation/SideBar";
 import ProductsBooks from "./ProductsBooks";
 import Footer from "../Navigation/Footer";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Store() {
   const [userData, setUserData] = useState(null);
@@ -15,7 +14,6 @@ export default function Store() {
   const [dataBooks, setDataBooks] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [countBooks, setCountBooks] = useState(0);
-  let navigation = useNavigate();
 
   const handleAddToCart = (book) => {
     const existingBook = cartItems.find((item) => item.bookId === book.bookId);
@@ -28,10 +26,8 @@ export default function Store() {
       setCartItems(updatedCartItems);
     } else {
       setCartItems([...cartItems, { ...book, quantity: 1 }]);
+      setCountBooks((prevCount) => prevCount + 1);
     }
-
-    setCountBooks(cartItems.length);
-    console.log(countBooks);
   };
 
   const handleRemoveFromCart = (book) => {
@@ -39,6 +35,7 @@ export default function Store() {
       (item) => item.bookId !== book.bookId
     );
     setCartItems(updatedCartItems);
+    setCountBooks((prevCount) => prevCount - 1);
   };
 
   const handleIncreaseQuantity = (book) => {
