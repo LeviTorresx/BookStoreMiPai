@@ -17,31 +17,12 @@ body {
   height: 100vh;
 }
 
-<<<<<<< HEAD
-.bg-transparent {
-  background: transparent;
-}
-
-.cart-count {
-  position: "absolute";
-  top: "-8px";
-  right: "-8px";
-  background-color: "red";
-  color: "white";
-  border-radius: "50%";
-  width: "20px";
-  height: "20px";
-  display: "flex";
-  justify-content: "center";
-  align-items: "center";
-  font-size: "14px";
-=======
 .cart-count{
   position: absolute;
   top: -12px;
   right: -20px;
-  background-color: yellow;
-  color: black;
+  background-color: #008bd1;
+  color: white;
   border-radius: 50%;
   width: 22px;
   height: 22px;
@@ -49,7 +30,6 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 15px;
->>>>>>> 30504c04be61ccb73c48e82cfe80a891a8733ed2
 }
 
 .flex {
