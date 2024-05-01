@@ -17,6 +17,7 @@ body {
   height: 100vh;
 }
 
+<<<<<<< HEAD
 .bg-transparent {
   background: transparent;
 }
@@ -34,6 +35,21 @@ body {
   justify-content: "center";
   align-items: "center";
   font-size: "14px";
+=======
+.cart-count{
+  position: absolute;
+  top: -12px;
+  right: -20px;
+  background-color: yellow;
+  color: black;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+>>>>>>> 30504c04be61ccb73c48e82cfe80a891a8733ed2
 }
 
 .flex {
