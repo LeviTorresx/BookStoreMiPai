@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ModalEditBooks from "./ModalEditBooks";
 import SearchBook from "./SearchBook";
-import SideBar from "../NavigationAdmin/SideBarAdmin";
+import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
 import Home from "../../Navigation/Home";
 
 export default function TableBook() {
@@ -46,23 +46,21 @@ export default function TableBook() {
 
   return (
     <div>
-      <div className="flex z-2 position-fixed">
-        <SideBar/>
-      </div>
-      <div>
-        <div className="d-flex justify-content-between align-items-center">
-          <div>
-            <Home/>
-          </div>
-          <div className="ps-5">
-            <h3>Books Table</h3>
-          </div>
-          <div>
-            <SearchBook />
-          </div>
+      <div className="d-flex justify-content-between align-items-center">
+        <div>
+          <Home />
+        </div>
+        <div className="ps-5 my-3" style={{ marginLeft: "140px" }}>
+          <h3>Books Table</h3>
+        </div>
+        <div style={{ marginRight: "75px" }}>
+          <SearchBook />
         </div>
       </div>
-      <div className="containers text-center" style={{ margin: "10px" }}>
+      <div className="flex z-2 position-fixed">
+        <SideBarAdmin />
+      </div>
+      <div className="containers text-center">
       </div>
       <div className="container">
         <table className="table table-striped table-table-hover align-middle">
@@ -70,12 +68,12 @@ export default function TableBook() {
             <tr className="text-center">
               <th scope="col">Id</th>
               <th scope="col">Image</th>
-              <th scope="col">Name Book</th>
+              <th scope="col">Book name</th>
               <th scope="col">Editorial</th>
               <th scope="col">Author</th>
               <th scope="col">Category</th>
               <th scope="col">Price</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">Stock</th>
               <th scope="col">Type</th>
               <th> </th>
             </tr>
@@ -96,7 +94,7 @@ export default function TableBook() {
                 <td>{book.bookType}</td>
                 <td className="text-center flex border-0 pt-4">
                   <div>
-                    <button className="button edit" onClick={() => handleEditClick(book.bookId)}>
+                    <button className="button" onClick={() => handleEditClick(book.bookId)}>
                       Edit
                     </button>
                   </div>

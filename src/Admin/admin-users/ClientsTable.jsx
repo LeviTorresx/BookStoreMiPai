@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Home from "../../Navigation/Home";
+import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
 import SearchUser from "./SearchUser";
 
 export default function ClientsTable() {
@@ -37,12 +38,15 @@ export default function ClientsTable() {
           <div>
             <Home/>
           </div>
-          <div className="containers text-center" style={{ margin: "20px" }}>
+          <div className="ps-5 my-3" style={{ marginLeft: "140px" }}>
             <h3> Table of users</h3>
           </div>
-          <div style={{ marginRight: "85px"}}>
+          <div style={{ marginRight: "75px"}}>
             <SearchUser/>
           </div>
+        </div>
+        <div className="flex z-2 position-fixed">
+          <SideBarAdmin/>
         </div>
         <div className="container">
           <table className="table table-striped table-table-hover align-middle">
@@ -71,7 +75,7 @@ export default function ClientsTable() {
                       <div>
                         <Link
                           to={`/editar/${user.idUser}`}
-                          className="btn btn-warning btn-sm me-3"
+                          className="btn btn-primary btn-sm me-3"
                         >
                           Edit
                         </Link>

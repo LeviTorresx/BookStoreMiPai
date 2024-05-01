@@ -17,6 +17,10 @@ body {
   height: 100vh;
 }
 
+.bg-transparent {
+  background: transparent;
+}
+
 .cart-count {
   position: "absolute";
   top: "-8px";
@@ -43,7 +47,7 @@ body {
   position: initial;
   padding-top: 100px;
   /* Espaciado superior */
-  background: gray;
+  background: transparent;
   transition: width 0.5s;
   /* Transición suave para el cambio de ancho */
   transition: 0.3s ease-out;
@@ -121,7 +125,7 @@ body {
   height: 100vh;
   position: initial;
   padding-top: 15px;
-  background: gray;
+  background: white;
   transition: width 0.5s;
   /* Transición suave para el cambio de ancho */
   transition: 0.3s ease-out;
@@ -183,13 +187,13 @@ body {
   margin-left: 20px;
   width: 100%;
   border-radius: 10px;
-  background-color: #9E7B68;
+  background-color: #6882f7;
   /* Color de fondo al pasar el mouse sobre los elementos */
   transition: 0.3s;
 }
 
 .sidebar-admin ul li:hover a {
-  color: #64B133;
+  color: #ffffff;
   transition: 0.5s;
 }
 
@@ -298,10 +302,10 @@ input[type="password"] {
 }
 
 .button {
-  background-color: #B6CCD7;
+  background-color: #008bd1;
   padding: 10px 20px;
   font-size: 16px;
-  color: #07060E;
+  color: #ffffff;
   font-weight: bold;
   border: none;
   border-radius: 5px;

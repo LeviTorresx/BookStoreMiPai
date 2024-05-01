@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Home from "../../Navigation/Home";
+import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
 
 export default function BookRegister() {
   const urlBase = "http://localhost:8080/books/save-book";
@@ -115,17 +116,19 @@ export default function BookRegister() {
   } = bookData;
 
   return (
-    <div className="bg-container-log">
+    <div className="bg-login">
       <div>
         <Home/>
       </div>
+      <div className="flex z-2 position-fixed">
+        <SideBarAdmin/>
+      </div>
       <div className="book-register-form-container">
-
         <div className="image-upload-container text-center">
-          <h2>Ingresar Image </h2>
+          <h2>Preview Image</h2>
 
           <button className="button w-75" onClick={abrirPopup}>
-            Image
+            Upload Image
           </button>
           <img src={bookData.bookImage} alt="" />
         </div>

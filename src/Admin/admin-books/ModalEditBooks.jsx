@@ -204,7 +204,7 @@ export default function ModalEditBooks({ closeModal, booksId }) {
               </div>
               <div className="flex justify-content-center">
                 <button className="btn btn-secondary" type="submit">
-                  guardar
+                  Save changes
                 </button>
               </div>
             </form>
