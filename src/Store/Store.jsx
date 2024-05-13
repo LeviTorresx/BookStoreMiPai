@@ -113,7 +113,7 @@ export default function Store() {
       )}
 
       <div className="flex z-2 position-fixed">
-        <SideBar />
+      <SideBar administratorAccess={userData ? userData.userType : null} />
       </div>
       <div className="content z-1">
         <div>

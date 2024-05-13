@@ -17,7 +17,6 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          
           <Route exact path="/" element={<Store />} />
 
           <Route element={<ProtectedRoute canActivate={user} redirect={"/"} />}>

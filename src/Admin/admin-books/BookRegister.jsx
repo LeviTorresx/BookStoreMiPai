@@ -132,7 +132,7 @@ export default function BookRegister() {
           </button>
           <img src={bookData.bookImage} alt="" />
         </div>
-        <div className="form-container w-50 mt-0">
+        <div className="form-container w-50">
           <h2>Registrar Libro</h2>
           <form onSubmit={onSubmit}>
             <div className="form-group w-auto">
