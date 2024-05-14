@@ -31,7 +31,7 @@ export default function ShoppingCart({
                <button className="button" onClick={toggle}>
               Close
             </button>
-            <button className="button" onClick={toggle}>
+            <button className="button" onClick="">
               Buy
             </button>
             </div>

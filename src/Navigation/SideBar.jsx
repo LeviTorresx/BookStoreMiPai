@@ -43,7 +43,7 @@ export default function SideBar({ administratorAccess }) {
             </a>
           </li>
           <li>
-            <a href="/settings">
+            <a target="_blank" rel="noreferrer" href="https://github.com/LeviTorresx">
               <FaUserGroup size={"30"} /> <span> About us</span>
             </a>
           </li>
