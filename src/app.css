@@ -105,13 +105,13 @@ body {
   margin-left: 20px;
   width: 100%;
   border-radius: 10px;
-  background-color: #9E7B68;
+  background-color: #6882f7;
   /* Color de fondo al pasar el mouse sobre los elementos */
   transition: 0.3s;
 }
 
 .sidebar ul li:hover a {
-  color: #64B133;
+  color: #ffffff;
   transition: 0.5s;
 }
 
@@ -192,6 +192,8 @@ body {
   color: #ffffff;
   transition: 0.5s;
 }
+
+
 
 .btn-ico {
   border-radius: 5px;
@@ -414,6 +416,31 @@ select {
 }
 
 .sidebar-cart ul li {
+  padding: 10px;
+  color: white;
+}
+
+.sidebar-profile {
+  z-index: 7;
+  height: 100vh;
+  width: 400px;
+  position: fixed;
+  top: 0;
+  right: -400px;
+  /* Colocado en el lado derecho por defecto */
+  background-color: white;
+  padding-top: 50px;
+  /* Para evitar que los elementos se superpongan al botón */
+  transition: all 0.3s ease;
+}
+
+.sidebar-profile ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-profile ul li {
   padding: 10px;
   color: white;
 }

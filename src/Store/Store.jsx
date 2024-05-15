@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import NavigationStore from "../Navigation/NavigationStore";
-import SideBar from "../Navigation/SideBar";
-import ProductsBooks from "./ProductsBooks";
-import Footer from "../Navigation/Footer";
 import axios from "axios";
+import Footer from "../Navigation/Footer";
+import NavigationStore from "../Navigation/NavigationStore";
+import ProductsBooks from "../Store/ProductsBooks";
+import SideBar from "../Navigation/SideBar";
 
 export default function Store() {
   const [userData, setUserData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showBooks, setShowBooks] = useState(false);
-  const urlBase = "http://localhost:8080/books/get-all-books";
   const [dataBooks, setDataBooks] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [countBooks, setCountBooks] = useState(0);
+
+  const urlBase = "http://localhost:8080/books/get-all-books";
 
   const calculateTotalPrice = (book) => {
     return book.price * book.quantity;
@@ -69,10 +70,10 @@ export default function Store() {
   };
 
   useEffect(() => {
-    loadBook();
+    loadBooks();
   }, []);
 
-  const loadBook = async () => {
+  const loadBooks = async () => {
     try {
       const result = await axios.get(urlBase);
       setDataBooks(result.data);
@@ -81,7 +82,7 @@ export default function Store() {
     } catch (error) {
       console.error("Error loading books:", error);
       setLoading(false);
-      // Puedes manejar el error de acuerdo a tus necesidades aquí
+      // Manejar el error según sea necesario
     }
   };
 
@@ -97,34 +98,19 @@ export default function Store() {
   }, []);
 
   return (
-    <div className=" z-3">
-      {userData ? (
-        <div>
-          <NavigationStore
-            userName={userData.userName}
-            userLog={true}
-            isOpen={isOpen}
-            toggle={toggleSidebar}
-            books={cartItems}
-            handleDecreaseQuantity={handleDecreaseQuantity}
-            handleRemoveFromCart={handleRemoveFromCart}
-            handleIncreaseQuantity={handleIncreaseQuantity}
-            count={countBooks}
-            totalPrice={calculateCartTotal()}
-          />
-        </div>
-      ) : (
-        <NavigationStore
-          isOpen={isOpen}
-          toggle={toggleSidebar}
-          books={cartItems}
-          handleDecreaseQuantity={handleDecreaseQuantity}
-          handleRemoveFromCart={handleRemoveFromCart}
-          handleIncreaseQuantity={handleIncreaseQuantity}
-          count={countBooks}
-          totalPrice={calculateCartTotal()}
-        />
-      )}
+    <div className="z-3">
+      <NavigationStore
+        user={userData ? userData : ""}
+        userLog={!!userData}
+        isOpen={isOpen}
+        toggle={toggleSidebar}
+        books={cartItems}
+        handleDecreaseQuantity={handleDecreaseQuantity}
+        handleRemoveFromCart={handleRemoveFromCart}
+        handleIncreaseQuantity={handleIncreaseQuantity}
+        count={countBooks}
+        totalPrice={calculateCartTotal()}
+      />
 
       <div className="flex z-2 position-fixed">
         <SideBar administratorAccess={userData ? userData.userType : null} />
