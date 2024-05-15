@@ -100,7 +100,7 @@ export default function NavigationStore({
       />
         <div className="z-5">
           <Profile
-            userName={user.userName}
+            user={user}
             isOpenProfile={showProfile}
             toggleProfile={handleClose}
           />
