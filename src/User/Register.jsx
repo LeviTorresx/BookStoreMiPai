@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 export default function Register() {
   let navegacion = useNavigate();
-
+  const defaultCountry = "CO"; // País preseleccionado
   const [user, setUser] = useState({
     userName: "",
     lastName: "",
@@ -17,6 +17,21 @@ export default function Register() {
     address: "",
     showAdditionalInfo: false, // Agregamos el estado para mostrar información adicional
   });
+
+  const countries = [
+    { code: "AR", name: "Argentina", dialCode: "+54" },
+    { code: "BO", name: "Bolivia", dialCode: "+591" },
+    { code: "BR", name: "Brazil", dialCode: "+55" },
+    { code: "CL", name: "Chile", dialCode: "+56" },
+    { code: "CO", name: "Colombia", dialCode: "+57" },
+    { code: "EC", name: "Ecuador", dialCode: "+593" },
+    { code: "GY", name: "Guyana", dialCode: "+592" },
+    { code: "PY", name: "Paraguay", dialCode: "+595" },
+    { code: "PE", name: "Peru", dialCode: "+51" },
+    { code: "SR", name: "Suriname", dialCode: "+597" },
+    { code: "UY", name: "Uruguay", dialCode: "+598" },
+    { code: "VE", name: "Venezuela", dialCode: "+58" },
+  ];
 
   const toggleAdditionalInfo = () => {
     setUser({
@@ -87,8 +102,14 @@ export default function Register() {
         <div className="flex justify-content-center">
           <div className="p-5">
             <div className="p-5">
-            <img src="./logoMipaiBookstore1.png" alt="" width={"300px"} />
-            <h2 className="fw-semibold text-center" style={{color: "black"}}> Are you new here?</h2>
+              <img src="./logoMipaiBookstore1.png" alt="" width={"300px"} />
+              <h2
+                className="fw-semibold text-center"
+                style={{ color: "black" }}
+              >
+                {" "}
+                Are you new here?
+              </h2>
             </div>
           </div>
           <div className="register-form-container w-50">
@@ -134,7 +155,20 @@ export default function Register() {
                   required
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group flex">
+                <select
+                  name="selectedCountry"
+                  onChange={(e) => onInputChange(e)}
+                  className="w-50"
+                  defaultValue={defaultCountry} // Establecer el país predeterminado como valor predeterminado
+                >
+                  <option value="">Pais</option>
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.name} ({country.dialCode})
+                    </option>
+                  ))}
+                </select>
                 <input
                   type="tel"
                   placeholder="Phone Number"

@@ -6,7 +6,7 @@ export default function ProductsBooks({ books, load, showBook, onAddToCart }) {
   return (
     <div>
       {load ? (
-        <div className="text-center m-5">
+        <div className="text-center">
           <div
             className="spinner-border m-5"
             role="status"

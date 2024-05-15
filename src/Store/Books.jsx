@@ -12,7 +12,7 @@ export default function Books({ book, addToCart }) {
           <img src={book.bookImage} width={"300px"} alt="x" />
         </div>
         <div className="p-2 rounded-bottom text-bg-light">
-          <p>precio: $ {book.price.toFixed(2)}</p>
+          <p>precio:  {book.price.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
           <h2
             style={{
               fontSize: "18px",

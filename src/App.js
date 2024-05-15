@@ -9,6 +9,7 @@ import Store from "./Store/Store";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { useLocalStorage } from "react-use";
 import ProtectedRouteAdmin from "./utils/protectedRouteAdmin";
+import PaymentPage from "./Store/Payment-Gateway/PaymentPage";
 
 function App() {
   const [user, setUser] = useLocalStorage("userData");
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Store />} />
+          <Route exact path="/payment" element={<PaymentPage/>}/>
 
           <Route element={<ProtectedRoute canActivate={user} redirect={"/"} />}>
             <Route path="/login" element={<Login />} />

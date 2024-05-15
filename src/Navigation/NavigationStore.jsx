@@ -16,6 +16,7 @@ export default function NavigationStore({
   handleIncreaseQuantity,
   handleDecreaseQuantity,
   count,
+  totalPrice
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -96,6 +97,7 @@ export default function NavigationStore({
         handleDecreaseQuantity={handleDecreaseQuantity}
         handleIncreaseQuantity={handleIncreaseQuantity}
         handleRemoveFromCart={handleRemoveFromCart}
+        totalPrice={totalPrice}
       />
 
       {showModal && (

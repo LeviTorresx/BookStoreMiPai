@@ -15,6 +15,18 @@ export default function Store() {
   const [cartItems, setCartItems] = useState([]);
   const [countBooks, setCountBooks] = useState(0);
 
+  const calculateTotalPrice = (book) => {
+    return book.price * book.quantity;
+  };
+
+  // Función para calcular el precio total del carrito
+  const calculateCartTotal = () => {
+    return cartItems.reduce(
+      (total, item) => total + calculateTotalPrice(item),
+      0
+    );
+  };
+
   const handleAddToCart = (book) => {
     const existingBook = cartItems.find((item) => item.bookId === book.bookId);
     if (existingBook) {
@@ -98,6 +110,7 @@ export default function Store() {
             handleRemoveFromCart={handleRemoveFromCart}
             handleIncreaseQuantity={handleIncreaseQuantity}
             count={countBooks}
+            totalPrice={calculateCartTotal()}
           />
         </div>
       ) : (
@@ -109,11 +122,12 @@ export default function Store() {
           handleRemoveFromCart={handleRemoveFromCart}
           handleIncreaseQuantity={handleIncreaseQuantity}
           count={countBooks}
+          totalPrice={calculateCartTotal()}
         />
       )}
 
       <div className="flex z-2 position-fixed">
-      <SideBar administratorAccess={userData ? userData.userType : null} />
+        <SideBar administratorAccess={userData ? userData.userType : null} />
       </div>
       <div className="content z-1">
         <div>
