@@ -1,26 +1,19 @@
 import React from "react";
 
-export default function Profile({ userName, handleClose, handleLogout }) {
+export default function Profile({ userName, isOpenProfile, toggleProfile }) {
   return (
-    <div className="containers">
-      <div className="flex justify-content-end">
-        <div className="bg-body p-4 rounded border border-5 border-dark-subtle">
-          <div className="border border-secondary rounded p-3">
-            <div className="d-flex flex-column text-center">
-              <p className="fs-2 fw-semibold">{userName}</p>
-              <p className="fw-semibold">Email: Email user </p>
-              <div className="m-2">
-                <button className="button" onClick={handleLogout}>
-                  Log out
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-content-end">
-            <button className="button" onClick={handleClose}>
+    <div>
+      <div className={`sidebar-cart ${isOpenProfile ? "open" : " "}`}>
+        <div className="text-center">
+          <h3>{userName}</h3>
+            <div className="pt-4">
+               <button className="button" onClick={toggleProfile}>
               Close
             </button>
-          </div>
+            <button className="button">
+              Edit
+            </button>
+            </div>  
         </div>
       </div>
     </div>

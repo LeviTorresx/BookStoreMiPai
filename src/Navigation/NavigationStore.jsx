@@ -7,7 +7,7 @@ import Profile from "../User/Profile";
 import ShoppingCart from "../Store/Shopping-Cart/ShoppingCart";
 
 export default function NavigationStore({
-  userName,
+  user,
   userLog,
   isOpen,
   toggle,
@@ -16,20 +16,22 @@ export default function NavigationStore({
   handleIncreaseQuantity,
   handleDecreaseQuantity,
   count,
+  isOpenProfile,
+  toggleProfile,
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   let navegacion = useNavigate();
 
   const handleClose = () => {
-    setShowModal(false);
+    setShowProfile(false);
   };
 
   const handleLogout = () => {
     // Lógica para cerrar sesión
     setIsLoggedIn(false); // Actualiza el estado de autenticación a false
     localStorage.removeItem("userData"); // Elimina los datos del usuario del localStorage
-    setShowModal(false); // Cierra el modal
+    setShowProfile(false); // Cierra el modal
     // Opcional: redirige al usuario a la página de inicio o donde desees después de cerrar sesión
     window.location.reload();
   };
@@ -40,8 +42,7 @@ export default function NavigationStore({
 
   const handleUserClick = () => {
     if (isLoggedIn) {
-      setShowModal(true);
-      console.log("showModal should be true");
+      setShowProfile(true);
     } else {
       navegacion("/login"); // Redirigir al usuario al inicio de sesión si no está autenticado
     }
@@ -84,7 +85,7 @@ export default function NavigationStore({
               type="submit"
               onClick={handleUserClick}
             >
-              <FaRegUser size={"25px"} /> {userName}
+              <FaRegUser size={"25px"} /> {user ? user.userName : ""}
             </button>
           </div>
         </div>
@@ -97,16 +98,13 @@ export default function NavigationStore({
         handleIncreaseQuantity={handleIncreaseQuantity}
         handleRemoveFromCart={handleRemoveFromCart}
       />
-
-      {showModal && (
         <div className="z-5">
           <Profile
-            userName={userName}
-            handleClose={handleClose}
-            handleLogout={handleLogout}
+            userName={user.userName}
+            isOpenProfile={showProfile}
+            toggleProfile={handleClose}
           />
         </div>
-      )}
     </div>
   );
 }

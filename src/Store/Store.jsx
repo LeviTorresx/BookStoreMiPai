@@ -89,7 +89,7 @@ export default function Store() {
       {userData ? (
         <div>
           <NavigationStore
-            userName={userData.userName}
+            user={userData}
             userLog={true}
             isOpen={isOpen}
             toggle={toggleSidebar}
@@ -109,6 +109,7 @@ export default function Store() {
           handleRemoveFromCart={handleRemoveFromCart}
           handleIncreaseQuantity={handleIncreaseQuantity}
           count={countBooks}
+
         />
       )}
 
