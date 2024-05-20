@@ -32,8 +32,7 @@ export default function ElementsCart({
                   className="btn-shopping-cart"
                   onClick={() => handleIncreaseQuantity(book)}
                 >
-                  {" "}
-                  <MdOutlineAddCircleOutline size={"25px"} />{" "}
+                  <MdOutlineAddCircleOutline size={"25px"} />
                 </button>
                 <span className="px-2">{book.quantity}</span>
                 <button
@@ -41,7 +40,7 @@ export default function ElementsCart({
                   onClick={() => handleDecreaseQuantity(book)}
                 >
                   {" "}
-                  <IoMdRemoveCircleOutline size={"25px"} />{" "}
+                  <IoMdRemoveCircleOutline size={"25px"} />
                 </button>
               </div>
             </div>
@@ -50,7 +49,7 @@ export default function ElementsCart({
                 className="btn-shopping-cart text-danger"
                 onClick={() => handleRemoveFromCart(book)}
               >
-                <FaRegTrashCan size={"20px"} />{" "}
+                <FaRegTrashCan size={"20px"} />
               </button>
             </div>
           </div>

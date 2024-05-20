@@ -29,7 +29,7 @@ export default function ProductsToPay() {
                 <img src={book.bookImage} alt="img" style={{width:"70px"}}  className="rounded-3"/>
                 <p className="mx-2">{book.bookName}</p>
               </div>
-              <div>{book.price.toLocaleString("es-CO", { style: "currency", currency: "COP" })}</div>
+              <div>{book.quantity} x {book.price.toLocaleString("es-CO", { style: "currency", currency: "COP" })}</div>
             </li>
           ))}
         </ul>

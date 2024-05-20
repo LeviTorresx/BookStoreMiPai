@@ -4,15 +4,19 @@ import Footer from "../Navigation/Footer";
 import NavigationStore from "../Navigation/NavigationStore";
 import ProductsBooks from "../Store/ProductsBooks";
 import SideBar from "../Navigation/SideBar";
+import { getUserData } from "../utils/GetUser";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function Store() {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(getUserData());
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showBooks, setShowBooks] = useState(false);
   const [dataBooks, setDataBooks] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [countBooks, setCountBooks] = useState(0);
+  let navigation = useNavigate();
 
   const urlBase = "http://localhost:8080/books/get-all-books";
 
@@ -71,6 +75,7 @@ export default function Store() {
 
   useEffect(() => {
     loadBooks();
+    paymentAlert();
   }, []);
 
   const loadBooks = async () => {
@@ -86,16 +91,36 @@ export default function Store() {
     }
   };
 
+  const paymentAlert = async () => {
+    const elements = localStorage.getItem("booksShipping");
+    if (elements) {
+      const booksShipping = JSON.parse(elements);
+      if (booksShipping.length > 0) {
+        Swal.fire({
+          position: "bottom-start",
+          title: "Tienes libros en proceso de pago",
+          showDenyButton: true,
+          showCancelButton: true,
+          cancelButtonText: "Cerrar",
+          confirmButtonText: "Continuar la compra",
+          denyButtonText: `Cancelar compra`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            Swal.fire("Vamos!", "", "success");
+            navigation("/payment");
+          } else if (result.isDenied) {
+            localStorage.setItem("booksShipping", JSON.stringify([]));
+            Swal.fire("Proceso de compra finalizado", "", "info");
+          }
+        });
+      }
+    }
+  };
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-
-  useEffect(() => {
-    const storedUserData = localStorage.getItem("userData");
-    if (storedUserData) {
-      setUserData(JSON.parse(storedUserData));
-    }
-  }, []);
 
   return (
     <div className="z-3">
@@ -105,6 +130,7 @@ export default function Store() {
         isOpen={isOpen}
         toggle={toggleSidebar}
         books={cartItems}
+        setBooks={setCartItems}
         handleDecreaseQuantity={handleDecreaseQuantity}
         handleRemoveFromCart={handleRemoveFromCart}
         handleIncreaseQuantity={handleIncreaseQuantity}

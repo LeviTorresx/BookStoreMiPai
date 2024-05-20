@@ -5,6 +5,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Profile from "../User/Profile";
 import ShoppingCart from "../Store/Shopping-Cart/ShoppingCart";
+import Swal from "sweetalert2";
 
 export default function NavigationStore({
   user,
@@ -12,11 +13,12 @@ export default function NavigationStore({
   isOpen,
   toggle,
   books,
+  setBooks,
   handleRemoveFromCart,
   handleIncreaseQuantity,
   handleDecreaseQuantity,
   count,
-  totalPrice
+  totalPrice,
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -27,12 +29,20 @@ export default function NavigationStore({
   };
 
   const handleLogout = () => {
-    // Lógica para cerrar sesión
-    setIsLoggedIn(false); // Actualiza el estado de autenticación a false
-    localStorage.removeItem("userData"); // Elimina los datos del usuario del localStorage
-    setShowProfile(false); // Cierra el modal
-    // Opcional: redirige al usuario a la página de inicio o donde desees después de cerrar sesión
-    window.location.reload();
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Tu sesión se cerrará",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsLoggedIn(false);
+        localStorage.removeItem("userData");
+        window.location.reload();
+      }   
+    });
   };
 
   useEffect(() => {
@@ -72,7 +82,6 @@ export default function NavigationStore({
             </div>
           </div>
           <div className="mx-3">
-            
             <button className="btn btn-ico mx-1" onClick={toggle}>
               <div style={{ position: "relative" }}>
                 {count > 0 && <div className="cart-count">{count}</div>}
@@ -93,18 +102,20 @@ export default function NavigationStore({
         isOpen={isOpen}
         toggle={toggle}
         books={books}
+        setBooks={setBooks}
         handleDecreaseQuantity={handleDecreaseQuantity}
         handleIncreaseQuantity={handleIncreaseQuantity}
         handleRemoveFromCart={handleRemoveFromCart}
         totalPrice={totalPrice}
       />
-        <div className="z-5">
-          <Profile
-            user={user}
-            isOpenProfile={showProfile}
-            toggleProfile={handleClose}
-          />
-        </div>
+      <div className="z-5">
+        <Profile
+          user={user}
+          isOpenProfile={showProfile}
+          toggleProfile={handleClose}
+          handleLogOut={handleLogout}
+        />
+      </div>
     </div>
   );
 }

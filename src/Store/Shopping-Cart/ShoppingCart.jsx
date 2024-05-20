@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import ElementsCart from "./ElementsCart";
 import { useNavigate } from "react-router-dom";
+import { getUserData } from "../../utils/GetUser";
+import Swal from "sweetalert2";
 
 export default function ShoppingCart({
   isOpen,
@@ -11,12 +13,34 @@ export default function ShoppingCart({
   handleDecreaseQuantity,
   totalPrice,
 }) {
-
   let navigation = useNavigate();
+
+  const [user, setuser] = useState(getUserData());
+
   const handleBuy = () => {
     localStorage.setItem("booksShipping", JSON.stringify(books));
-    navigation("/payment");
+
+    if (validateBooks()) {
+      if (user) {
+        navigation("/payment");
+      } else {
+        navigation("/login");
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No hay libros en el carrito",
+      });
+    }
   };
+
+  const validateBooks = () => {
+    let contBooks = localStorage.getItem("booksShipping");
+    let booksArray = JSON.parse(contBooks); 
+    return booksArray.length > 0;
+  };
+  
 
   return (
     <div>
@@ -55,6 +79,6 @@ export default function ShoppingCart({
           </div>
         </div>
       </div>
-    </div>  
+    </div>
   );
 }

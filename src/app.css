@@ -472,3 +472,25 @@ select {
 .bg-admin {
   background-color: #07060E;
 }
+
+.r-boton {
+  opacity: 0; /* Hace el input invisible pero aún seleccionable */
+  position: absolute;
+}
+
+.radio-custom {
+  display: inline-block;
+  padding: 8px;
+  text-align: center;
+  border-radius: 10px; /* Esto hace que el botón se vea redondo */
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 70%;
+  transition:background-color .2s;
+}
+
+.r-boton:checked + .radio-custom {  
+  border: 2px solid black ;
+  opacity: 100%;
+  background-color: rgb(0, 0, 0, 0.3) ;
+}

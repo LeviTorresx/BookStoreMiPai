@@ -7,12 +7,13 @@ import BookRegister from "./Admin/admin-books/BookRegister";
 import TableBook from "./Admin/admin-books/TableBook";
 import Store from "./Store/Store";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import { useLocalStorage } from "react-use";
 import ProtectedRouteAdmin from "./utils/protectedRouteAdmin";
 import PaymentPage from "./Store/Payment-Gateway/PaymentPage";
+import { useState } from "react";
+import { getUserData } from "./utils/GetUser";
 
 function App() {
-  const [user, setUser] = useLocalStorage("userData");
+  const [user, setUser] = useState(getUserData());
 
   return (
     <div>
