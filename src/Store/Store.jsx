@@ -16,7 +16,15 @@ export default function Store() {
   const [dataBooks, setDataBooks] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [countBooks, setCountBooks] = useState(0);
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [replieDataBooks, setReplieDataBooks] = useState([]);
+
   let navigation = useNavigate();
+
+  useEffect(() => {
+    loadBooks();
+    paymentAlert();
+  }, [filteredBooks]);
 
   const urlBase = "http://localhost:8080/books/get-all-books";
 
@@ -24,7 +32,6 @@ export default function Store() {
     return book.price * book.quantity;
   };
 
-  // Función para calcular el precio total del carrito
   const calculateCartTotal = () => {
     return cartItems.reduce(
       (total, item) => total + calculateTotalPrice(item),
@@ -73,21 +80,20 @@ export default function Store() {
     setCartItems(updatedCartItems);
   };
 
-  useEffect(() => {
-    loadBooks();
-    paymentAlert();
-  }, []);
-
   const loadBooks = async () => {
     try {
-      const result = await axios.get(urlBase);
-      setDataBooks(result.data);
+      if (filteredBooks.length === 0) {
+        const result = await axios.get(urlBase);
+        setReplieDataBooks(result.data);
+        setDataBooks(result.data);
+      } else {
+        setDataBooks(filteredBooks);
+      }
       setLoading(false);
       setShowBooks(true);
     } catch (error) {
       console.error("Error loading books:", error);
       setLoading(false);
-      // Manejar el error según sea necesario
     }
   };
 
@@ -122,6 +128,10 @@ export default function Store() {
     setIsOpen(!isOpen);
   };
 
+  const handleFilteredBooks = (filteredBooks) => {
+    setFilteredBooks(filteredBooks);
+  };
+
   return (
     <div className="z-3">
       <NavigationStore
@@ -136,6 +146,8 @@ export default function Store() {
         handleIncreaseQuantity={handleIncreaseQuantity}
         count={countBooks}
         totalPrice={calculateCartTotal()}
+        availableBooks={replieDataBooks || []}
+        onFilteredBooks={handleFilteredBooks}
       />
 
       <div className="flex z-2 position-fixed">
