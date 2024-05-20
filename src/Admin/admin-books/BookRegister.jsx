@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Home from "../../Navigation/Home";
 import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
+import NavBarAdmin from "../NavigationAdmin/NavBarAdmin";
 
 export default function BookRegister() {
   const urlBase = "http://localhost:8080/books/save-book";
@@ -117,13 +117,13 @@ export default function BookRegister() {
 
   return (
     <div className="bg-login">
-      <div>
-        <Home/>
+      <div className="w-100">
+        <NavBarAdmin/>
       </div>
       <div className="flex z-2 position-fixed">
         <SideBarAdmin/>
       </div>
-      <div className="book-register-form-container">
+      <div className="book-register-form-container" style={{paddingTop: "100px"}}>
         <div className="image-upload-container text-center">
           <h2>Preview Image</h2>
 
@@ -133,7 +133,7 @@ export default function BookRegister() {
           <img src={bookData.bookImage} alt="" />
         </div>
         <div className="form-container w-50">
-          <h2>Registrar Libro</h2>
+          <h2>Book register</h2>
           <form onSubmit={onSubmit}>
             <div className="form-group w-auto">
               <input

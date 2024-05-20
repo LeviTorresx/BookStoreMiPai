@@ -120,7 +120,7 @@ body {
   /* Ancho de la barra lateral cuando está contraída */
   height: 100vh;
   position: initial;
-  padding-top: 15px;
+  padding-top: 100px;
   background: white;
   transition: width 0.5s;
   /* Transición suave para el cambio de ancho */

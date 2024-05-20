@@ -8,7 +8,9 @@ import { FaTruckArrowRight } from "react-icons/fa6";
 export default function SideBar() {
   return (
     <div>
-      <div className="sidebar-admin">
+
+      
+      <div className="sidebar-admin bg-light">
         <ul>
           <li>
             <a href="/admin/book-register">
@@ -37,6 +39,7 @@ export default function SideBar() {
           </li>
         </ul>
       </div>
+
     </div>
   )
 }

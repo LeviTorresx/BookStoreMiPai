@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ModalEditBooks from "./ModalEditBooks";
-import SearchBook from "./SearchBook";
 import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
-import Home from "../../Navigation/Home";
+import NavBarAdmin from "../NavigationAdmin/NavBarAdmin";
+
 
 export default function TableBook() {
   const urlBase = "http://localhost:8080/books/get-all-books";
@@ -45,24 +45,16 @@ export default function TableBook() {
   };
 
   return (
-    <div>
-      <div className="d-flex justify-content-between align-items-center">
-        <div>
-          <Home />
-        </div>
-        <div className="ps-5 my-3" style={{ marginLeft: "140px" }}>
-          <h3>Books Table</h3>
-        </div>
-        <div style={{ marginRight: "75px" }}>
-          <SearchBook />
-        </div>
+    <div className="z-3">
+      <div className="w-100">
+        <NavBarAdmin/>
       </div>
       <div className="flex z-2 position-fixed">
-        <SideBarAdmin />
+        <SideBarAdmin/>
       </div>
       <div className="containers text-center">
       </div>
-      <div className="container">
+      <div className="container" style={{paddingTop: "90px"}}>
         <table className="table table-striped table-table-hover align-middle">
           <thead className="table-dark">
             <tr className="text-center">

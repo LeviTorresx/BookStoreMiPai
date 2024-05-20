@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Home from "../../Navigation/Home";
 import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
-import SearchUser from "./SearchUser";
+import NavBarAdmin from "../NavigationAdmin/NavBarAdmin";
 
 export default function ClientsTable() {
   const urlBase = "http://localhost:8080/users/get-all-users";
@@ -33,22 +32,12 @@ export default function ClientsTable() {
 
   return (
     <div>
-      <div>
-        <div className="d-flex justify-content-between align-items-center">
-          <div>
-            <Home/>
-          </div>
-          <div className="ps-5 my-3" style={{ marginLeft: "140px" }}>
-            <h3> Table of users</h3>
-          </div>
-          <div style={{ marginRight: "75px"}}>
-            <SearchUser/>
-          </div>
-        </div>
+      <div className="z-3">
+        <NavBarAdmin />
         <div className="flex z-2 position-fixed">
-          <SideBarAdmin/>
+          <SideBarAdmin />
         </div>
-        <div className="container">
+        <div className="container" style={{paddingTop: "90px"}}>
           <table className="table table-striped table-table-hover align-middle">
             <thead className="table-dark">
               <tr>
