@@ -29,7 +29,7 @@ export default function Books({ book, addToCart }) {
           <div className="text-center">
             <button className="btn-cart w-100 p-2" onClick={() => addToCart(book)}>
               <FaShoppingCart className="mx-2" />
-              Add to cart
+              Añadir al carrito
             </button>
           </div>
         </div>

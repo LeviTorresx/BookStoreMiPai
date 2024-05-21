@@ -5,40 +5,59 @@ import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
 import NavBarAdmin from "../NavigationAdmin/NavBarAdmin";
 
 export default function ClientsTable() {
-  const urlBase = "http://localhost:8080/users/get-all-users";
+  const urlBase = "http://localhost:8080/users";
 
-  const [user, setUser] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
     loadClient();
-  }, []);
+  }, [filteredUsers]);
 
   const loadClient = async () => {
     try {
-      const result = await axios.get(urlBase);
-      console.log("result of load user");
-      console.log(result.data);
-      setUser(result.data);
+      if (filteredUsers.length === 0) {
+        const result = await axios.get(urlBase + "/get-all-users");
+        setUsers(result.data);
+        setFilteredUsers(result.data);
+      } else {
+        setUsers(filteredUsers);
+      }
     } catch (error) {
-      console.error("Error loading user:", error);
-      // Puedes manejar el error de acuerdo a tus necesidades aquí
+      console.error("Error loading users:", error);
     }
   };
 
   const deleteClient = async (id) => {
-    await axios.delete(`${urlBase}/${id}`);
-    loadClient();
+    try {
+      
+      await axios.delete(`${urlBase}/delete-user?userId=${id}`);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting user:"+id, error);
+    }
+  };
+
+  const handleSearch = (searchTerm) => {
+    const filtered = users.filter(
+      (user) =>
+        user.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.phoneNumber.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filtered);
   };
 
   return (
     <div>
       <div className="z-3">
-        <NavBarAdmin />
+        <NavBarAdmin onSearch={handleSearch} />
         <div className="flex z-2 position-fixed">
           <SideBarAdmin />
         </div>
-        <div className="container" style={{paddingTop: "90px"}}>
-          <table className="table table-striped table-table-hover align-middle">
+        <div className="container" style={{ paddingTop: "90px" }}>
+          <table className="table table-striped table-hover align-middle">
             <thead className="table-dark">
               <tr>
                 <th scope="col">Id</th>
@@ -46,39 +65,35 @@ export default function ClientsTable() {
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
-
-                <th> </th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              {
-                //iteramos el arreglo de empleados
-                user.map((user, index) => (
-                  <tr key={index}>
-                    <th scope="row">{user.userId}</th>
-                    <td>{user.userName}</td>
-                    <td>{user.lastName}</td>
-                    <td>{user.email}</td>
-                    <td>{user.phoneNumber}</td>
-                    <td className="text-center">
-                      <div>
-                        <Link
-                          to={`/editar/${user.idUser}`}
-                          className="btn btn-primary btn-sm me-3"
-                        >
-                          Edit
-                        </Link>
-                        <Link
-                          className="btn btn-danger btn-sm"
-                          onClick={() => deleteClient(user.idUser)}
-                        >
-                          Delete
-                        </Link>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              }
+              {filteredUsers.map((user, index) => (
+                <tr key={index}>
+                  <th scope="row">{user.userId}</th>
+                  <td>{user.userName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phoneNumber}</td>
+                  <td className="text-center">
+                    <div>
+                      <Link
+                        
+                        className="btn btn-primary btn-sm me-3"
+                      >
+                        N/a
+                      </Link>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => deleteClient(user.userId)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

@@ -3,31 +3,52 @@ import React, { useEffect, useState } from "react";
 import ModalEditBooks from "./ModalEditBooks";
 import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
 import NavBarAdmin from "../NavigationAdmin/NavBarAdmin";
-
+import Swal from "sweetalert2";
 
 export default function TableBook() {
-  const urlBase = "http://localhost:8080/books/get-all-books";
+  const urlBase = "http://localhost:8080/books";
   const [books, setBooks] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [filteredBooks, setFilteredBooks] = useState([]);
 
   useEffect(() => {
     loadBooks();
-  }, []);
+  }, [filteredBooks]);
 
   const loadBooks = async () => {
     try {
-      const result = await axios.get(urlBase);
-      setBooks(result.data);
+      if (filteredBooks.length === 0) {
+        const result = await axios.get(urlBase + "/get-all-books");
+        setBooks(result.data);
+      } else setBooks(filteredBooks);
     } catch (error) {
       console.error("Error loading books:", error);
     }
   };
 
   const deleteBook = async (Id) => {
-    alert("chupas");
-    //await axios.delete("  ")
+    const handleDelete = async () => {
+      try {
+        await axios.delete(`${urlBase}/delete-book?bookId=${Id}`);
+        window.location.reload();
+      } catch (error) {
+        console.error("Error deleting book:", error);
+      }
+    };
 
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "El libro se eliminara por completo",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDelete();
+      }
+    });
   };
 
   const openModal = () => {
@@ -44,17 +65,27 @@ export default function TableBook() {
     openModal();
   };
 
+  const handleSearch = (searchTerm) => {
+    const filtered = books.filter(
+      (book) =>
+        book.bookName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.bookType.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredBooks(filtered);
+  };
+
   return (
     <div className="z-3">
       <div className="w-100">
-        <NavBarAdmin/>
+        <NavBarAdmin onSearch={handleSearch} />
       </div>
       <div className="flex z-2 position-fixed">
-        <SideBarAdmin/>
+        <SideBarAdmin />
       </div>
-      <div className="containers text-center">
-      </div>
-      <div className="container" style={{paddingTop: "90px"}}>
+      <div className="containers text-center"></div>
+      <div className="container" style={{ paddingTop: "90px" }}>
         <table className="table table-striped table-table-hover align-middle">
           <thead className="table-dark">
             <tr className="text-center">
@@ -72,7 +103,10 @@ export default function TableBook() {
           </thead>
           <tbody>
             {books.map((book, index) => (
-              <tr key={index} className="text-center border border-2 border-dark">
+              <tr
+                key={index}
+                className="text-center border border-2 border-dark"
+              >
                 <th scope="row">{book.bookId}</th>
                 <td>
                   <img src={book.bookImage} alt="img-book" width={"100px"} />
@@ -86,12 +120,21 @@ export default function TableBook() {
                 <td>{book.bookType}</td>
                 <td className="text-center flex border-0 pt-4">
                   <div>
-                    <button className="button" onClick={() => handleEditClick(book.bookId)}>
+                    <button
+                      className="button"
+                      onClick={() => handleEditClick(book.bookId)}
+                    >
                       Edit
                     </button>
                   </div>
                   <div>
-                    <button className="button delete" onClick={() => deleteBook(book.bookId)}> Delete</button>
+                    <button
+                      className="button delete"
+                      onClick={() => deleteBook(book.bookId)}
+                    >
+                      {" "}
+                      Delete
+                    </button>
                   </div>
                 </td>
               </tr>

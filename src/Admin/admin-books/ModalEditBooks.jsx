@@ -103,7 +103,7 @@ export default function ModalEditBooks({ closeModal, booksId }) {
             ></button>
           </div>
           <div className="modal-body">
-            <h1 className="text-center">Edit Book</h1>
+            <h1 className="text-center">Editar Libro</h1>
             <form onSubmit={onSubmit}>
               <div className="flex p-2">
                 <div className="pt-5">
@@ -204,14 +204,14 @@ export default function ModalEditBooks({ closeModal, booksId }) {
               </div>
               <div className="flex justify-content-center">
                 <button className="btn btn-secondary" type="submit">
-                  Save changes
+                  Guardar cambios
                 </button>
               </div>
             </form>
           </div>
           <div className="modal-footer">
             <button className="btn btn-secondary" onClick={closeModal}>
-              Close
+              Cerrar
             </button>
           </div>
         </div>

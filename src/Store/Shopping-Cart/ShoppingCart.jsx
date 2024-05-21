@@ -37,10 +37,9 @@ export default function ShoppingCart({
 
   const validateBooks = () => {
     let contBooks = localStorage.getItem("booksShipping");
-    let booksArray = JSON.parse(contBooks); 
+    let booksArray = JSON.parse(contBooks);
     return booksArray.length > 0;
   };
-  
 
   return (
     <div>
@@ -61,7 +60,7 @@ export default function ShoppingCart({
               ))}
             </div>
             <div className="text-center">
-              Total:{" "}
+              Total:
               {totalPrice.toLocaleString("es-CO", {
                 style: "currency",
                 currency: "COP",

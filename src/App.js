@@ -20,7 +20,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Store />} />
-          <Route exact path="/payment" element={<PaymentPage/>}/>
+          <Route exact path="/payment" element={<PaymentPage />} />
 
           <Route element={<ProtectedRoute canActivate={user} redirect={"/"} />}>
             <Route path="/login" element={<Login />} />
