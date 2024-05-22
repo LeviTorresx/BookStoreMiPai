@@ -39,7 +39,7 @@ export default function PaymentPage() {
               <button className="button bg-danger" onClick={handleExit}>
                 Salir
               </button>
-              <button className="button ">Pagar</button>
+              <button className="button "> Pagar</button>
             </div>
           </div>
         </div>

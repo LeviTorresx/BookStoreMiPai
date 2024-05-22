@@ -72,7 +72,7 @@ export default function Books({ book, addToCart }) {
       </div>
 
       {statusModal && (
-        <VisualizerBook closeModal={closeModal} book={visualizerBook} addToCart={addToCart} />
+        <VisualizerBook closeModal={closeModal} book={visualizerBook} addCart={addToCart} />
       )}
     </div>
   );

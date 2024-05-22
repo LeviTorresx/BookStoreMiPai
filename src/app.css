@@ -518,3 +518,8 @@ select {
 .payment-fields {
   margin-top: 20px;
 }
+
+.container-visualizer{
+  max-height: 200px;
+  overflow-y: auto;
+}
