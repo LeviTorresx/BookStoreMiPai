@@ -125,20 +125,20 @@ export default function BookRegister() {
       </div>
       <div className="book-register-form-container" style={{paddingTop: "100px"}}>
         <div className="image-upload-container text-center">
-          <h2>Preview Image</h2>
+          <h2>Previsualizar imagen</h2>
 
           <button className="button w-75" onClick={abrirPopup}>
-            Upload Image
+            Subir imagen
           </button>
           <img src={bookData.bookImage} alt="" />
         </div>
         <div className="form-container w-50">
-          <h2>Book register</h2>
+          <h2>Registrar libro</h2>
           <form onSubmit={onSubmit}>
             <div className="form-group w-auto">
               <input
                 type="text"
-                placeholder="Name"
+                placeholder="Nombre"
                 name="bookName"
                 value={bookName}
                 onChange={(e) => onInputChange(e)}
@@ -172,7 +172,7 @@ export default function BookRegister() {
                 onChange={(e) => onInputChange(e)}
                 required
               >
-                <option value="">Seleccione Categoria</option>
+                <option value="">Seleccione Categoría</option>
                 {categories.map((cat, index) => (
                   <option key={index} value={cat}>
                     {cat}
@@ -184,7 +184,7 @@ export default function BookRegister() {
               <textarea
                 className="w-100 border border-secondary-subtle rounded-2 "
                 type="text"
-                placeholder="Description"
+                placeholder="Descripción"
                 name="bookDescription"
                 value={bookDescription}
                 onChange={(e) => onInputChange(e)}
@@ -194,7 +194,7 @@ export default function BookRegister() {
             <div className="form-group">
               <input
                 type="number"
-                placeholder="Price"
+                placeholder="Precio"
                 name="price"
                 value={price}
                 onChange={(e) => onInputChange(e)}
@@ -204,7 +204,7 @@ export default function BookRegister() {
             <div className="form-group">
               <input
                 type="number"
-                placeholder="Quantity"
+                placeholder="Cantidad"
                 name="quantity"
                 value={quantity}
                 onChange={(e) => onInputChange(e)}
@@ -227,7 +227,7 @@ export default function BookRegister() {
               <input
                 className="w-100 border border-secondary-subtle rounded-2 "
                 type="text"
-                placeholder="bookimage"
+                placeholder="Imagen del libro"
                 name="bookImage"
                 value={bookImage}
                 onChange={(e) => onInputChange(e)}

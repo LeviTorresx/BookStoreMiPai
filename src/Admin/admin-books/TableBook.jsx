@@ -87,7 +87,7 @@ export default function TableBook() {
   };
 
   return (
-    <div className="z-3">
+    <div className="bg-login z-3">
       <div className="w-100">
         <NavBarAdmin onSearch={handleSearch} />
       </div>
@@ -96,19 +96,19 @@ export default function TableBook() {
       </div>
       <div className="containers text-center"></div>
       <div className="container" style={{ paddingTop: "90px" }}>
-        <table className="table table-striped table-hover align-middle">
+        <table className="table align-middle">
           <thead className="table-dark">
             <tr className="text-center">
               <th scope="col">Id</th>
-              <th scope="col">Image</th>
-              <th scope="col">Book name</th>
+              <th scope="col">Imagen</th>
+              <th scope="col">Nombre del libro</th>
               <th scope="col">Editorial</th>
-              <th scope="col">Author</th>
-              <th scope="col">Category</th>
-              <th scope="col">Price</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Type</th>
-              <th scope="col">Actions</th>
+              <th scope="col">Autor</th>
+              <th scope="col">Categoría</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -128,23 +128,23 @@ export default function TableBook() {
                 <td>{book.price}</td>
                 <td>{book.quantity}</td>
                 <td>{book.bookType}</td>
-                <td className="text-center flex border-0 pt-4">
-                  <div>
-                    <button
-                      className="btn btn-primary mx-2"
-                      onClick={() => handleEditClick(book.bookId)}
-                    >
-                      Edit
-                    </button>
-                  </div>
-                  <div>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => deleteBook(book.bookId)}
-                    >
-                      Delete
-                    </button>
-                  </div>
+                <td className="text-center flex border-0" style={{ paddingTop: "35px" }}>
+
+                  <button
+                    className="btn btn-primary mx-2"
+                    onClick={() => handleEditClick(book.bookId)}
+                  >
+                    Edit
+                  </button>
+
+
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteBook(book.bookId)}
+                  >
+                    Delete
+                  </button>
+
                 </td>
               </tr>
             ))}

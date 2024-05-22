@@ -129,7 +129,7 @@ export default function NavigationStore({
                 onChange={handleSearchChange}
               />
               <button
-                className="btn btn-light border border-2 border-black"
+                className="btn btn-ico border border-2 border-black"
                 type="button"
                 onClick={handleSearchBook}
               >

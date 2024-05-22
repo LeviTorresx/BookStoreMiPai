@@ -65,11 +65,11 @@ export default function ClientsTable() {
             <thead className="table-dark">
               <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Last Name</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
                 <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th></th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>

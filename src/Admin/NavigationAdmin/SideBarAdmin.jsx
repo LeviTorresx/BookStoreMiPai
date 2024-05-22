@@ -14,27 +14,27 @@ export default function SideBar() {
         <ul>
           <li>
             <a href="/admin/book-register">
-              <FaBook size={"30"} /> <span> Book register</span>
+              <FaBook size={"30"} /> <span> Registrar libro</span>
             </a>
           </li>
           <li>
             <a href="/admin/book-tableContent">
-              <FaDatabase size={"30"} /> <span> Books CRUD</span>
+              <FaDatabase size={"30"} /> <span> CRUD de libros</span>
             </a>
           </li>
           <li>
             <a href="/admin/clientTable">
-              <FaIdCard size={"30"} /> <span> Clients</span>
+              <FaIdCard size={"30"} /> <span> Clientes</span>
             </a>
           </li>
           <li>
             <a href="/settings">
-              <FaTruckArrowRight size={"30"} /> <span> Shipping</span>
+              <FaTruckArrowRight size={"30"} /> <span> Envíos</span>
             </a>
           </li>
           <li>
             <a href="/settings">
-              <FaUserGroup size={"30"} /> <span> About us</span>
+              <FaUserGroup size={"30"} /> <span> Sobre nosotros</span>
             </a>
           </li>
         </ul>

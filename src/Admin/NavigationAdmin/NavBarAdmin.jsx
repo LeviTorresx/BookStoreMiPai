@@ -10,16 +10,16 @@ export default function NavBarAdmin({ onSearch }) {
   useEffect(() => {
     switch (location.pathname) {
       case "/admin/book-register":
-        setPageTitle("Book register");
+        setPageTitle("Registrar libros");
         break;
       case "/admin/book-tableContent":
-        setPageTitle("Books CRUD");
+        setPageTitle("CRUD de libros");
         break;
       case "/admin/clientTable":
-        setPageTitle("Clients CRUD");
+        setPageTitle("CRUD de clientes");
         break;
       default:
-        setPageTitle("Admin zone");
+        setPageTitle("Zona de administración");
     }
   }, [location.pathname]);
 
