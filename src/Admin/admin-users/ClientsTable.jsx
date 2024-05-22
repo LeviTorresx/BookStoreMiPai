@@ -3,26 +3,21 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
 import NavBarAdmin from "../NavigationAdmin/NavBarAdmin";
+import Swal from "sweetalert2";
 
 export default function ClientsTable() {
   const urlBase = "http://localhost:8080/users";
 
   const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
-    loadClient();
-  }, [filteredUsers]);
+    loadClients();
+  }, []);
 
-  const loadClient = async () => {
+  const loadClients = async () => {
     try {
-      if (filteredUsers.length === 0) {
-        const result = await axios.get(urlBase + "/get-all-users");
-        setUsers(result.data);
-        setFilteredUsers(result.data);
-      } else {
-        setUsers(filteredUsers);
-      }
+      const result = await axios.get(`${urlBase}/get-all-users`);
+      setUsers(result.data);
     } catch (error) {
       console.error("Error loading users:", error);
     }
@@ -30,11 +25,10 @@ export default function ClientsTable() {
 
   const deleteClient = async (id) => {
     try {
-      
       await axios.delete(`${urlBase}/delete-user?userId=${id}`);
-      window.location.reload();
+      setUsers(users.filter((user) => user.userId !== id));
     } catch (error) {
-      console.error("Error deleting user:"+id, error);
+      console.error("Error deleting user:", error);
     }
   };
 
@@ -46,7 +40,17 @@ export default function ClientsTable() {
         user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.phoneNumber.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setFilteredUsers(filtered);
+
+    if (filtered.length === 0) {
+      Swal.fire({
+        title: "No hay coincidencias",
+        text: "No se encontraron usuarios que coincidan con los criterios de búsqueda.",
+        icon: "info",
+        confirmButtonText: "Aceptar",
+      });
+    } else {
+      setUsers(filtered);
+    }
   };
 
   return (
@@ -69,8 +73,8 @@ export default function ClientsTable() {
               </tr>
             </thead>
             <tbody>
-              {filteredUsers.map((user, index) => (
-                <tr key={index}>
+              {users.map((user) => (
+                <tr key={user.userId}>
                   <th scope="row">{user.userId}</th>
                   <td>{user.userName}</td>
                   <td>{user.lastName}</td>
@@ -79,10 +83,10 @@ export default function ClientsTable() {
                   <td className="text-center">
                     <div>
                       <Link
-                        
+                        to={`/user/${user.userId}`}
                         className="btn btn-primary btn-sm me-3"
                       >
-                        N/a
+                        Edit
                       </Link>
                       <button
                         className="btn btn-danger btn-sm"

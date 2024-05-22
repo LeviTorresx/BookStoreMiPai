@@ -12,19 +12,16 @@ export default function Store() {
   const [userData, setUserData] = useState(getUserData());
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [showBooks, setShowBooks] = useState(false);
   const [dataBooks, setDataBooks] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [countBooks, setCountBooks] = useState(0);
-  const [filteredBooks, setFilteredBooks] = useState([]);
-  const [replieDataBooks, setReplieDataBooks] = useState([]);
 
-  let navigation = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadBooks();
-    paymentAlert();
-  }, [filteredBooks]);
+    checkPaymentStatus();
+  }, []);
 
   const urlBase = "http://localhost:8080/books/get-all-books";
 
@@ -82,45 +79,35 @@ export default function Store() {
 
   const loadBooks = async () => {
     try {
-      if (filteredBooks.length === 0) {
-        const result = await axios.get(urlBase);
-        setReplieDataBooks(result.data);
-        setDataBooks(result.data);
-      } else {
-        setDataBooks(filteredBooks);
-      }
+      const result = await axios.get(urlBase);
+      setDataBooks(result.data);
       setLoading(false);
-      setShowBooks(true);
     } catch (error) {
       console.error("Error loading books:", error);
       setLoading(false);
     }
   };
 
-  const paymentAlert = async () => {
-    const elements = localStorage.getItem("booksShipping");
-    if (elements) {
-      const booksShipping = JSON.parse(elements);
-      if (booksShipping.length > 0) {
-        Swal.fire({
-          position: "bottom-start",
-          title: "Tienes libros en proceso de pago",
-          showDenyButton: true,
-          showCancelButton: true,
-          cancelButtonText: "Cerrar",
-          confirmButtonText: "Continuar la compra",
-          denyButtonText: `Cancelar compra`,
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            Swal.fire("Vamos!", "", "success");
-            navigation("/payment");
-          } else if (result.isDenied) {
-            localStorage.setItem("booksShipping", JSON.stringify([]));
-            Swal.fire("Proceso de compra finalizado", "", "info");
-          }
-        });
-      }
+  const checkPaymentStatus = () => {
+    const booksShipping = JSON.parse(localStorage.getItem("booksShipping"));
+    if (booksShipping && booksShipping.length > 0) {
+      Swal.fire({
+        position: "bottom-start",
+        title: "Tienes libros en proceso de pago",
+        showDenyButton: true,
+        showCancelButton: true,
+        cancelButtonText: "Cerrar",
+        confirmButtonText: "Continuar la compra",
+        denyButtonText: `Cancelar compra`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Vamos!", "", "success");
+          navigate("/payment");
+        } else if (result.isDenied) {
+          localStorage.setItem("booksShipping", JSON.stringify([]));
+          Swal.fire("Proceso de compra finalizado", "", "info");
+        }
+      });
     }
   };
 
@@ -129,13 +116,23 @@ export default function Store() {
   };
 
   const handleFilteredBooks = (filteredBooks) => {
-    setFilteredBooks(filteredBooks);
+    if (filteredBooks.length === 0) {
+      Swal.fire({
+        title: "Sin coincidencias",
+        text: "No se encontraron libros que coincidan con los criterios de búsqueda.",
+        icon: "info",
+        confirmButtonText: "Aceptar",
+      });
+      loadBooks();
+    } else {
+      setDataBooks(filteredBooks);
+    }
   };
 
   return (
     <div className="z-3">
       <NavigationStore
-        user={userData ? userData : ""}
+        user={userData || ""}
         userLog={!!userData}
         isOpen={isOpen}
         toggle={toggleSidebar}
@@ -146,7 +143,7 @@ export default function Store() {
         handleIncreaseQuantity={handleIncreaseQuantity}
         count={countBooks}
         totalPrice={calculateCartTotal()}
-        availableBooks={replieDataBooks || []}
+        availableBooks={dataBooks || []}
         onFilteredBooks={handleFilteredBooks}
       />
 
@@ -158,7 +155,7 @@ export default function Store() {
           <ProductsBooks
             books={dataBooks}
             load={loading}
-            showBook={showBooks}
+            showBook={dataBooks.length > 0}
             onAddToCart={handleAddToCart}
           />
         </div>

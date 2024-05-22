@@ -509,3 +509,12 @@ select {
 .suggestion-item:hover {
   background-color: #f0f0f0;
 }
+
+.payment-methods-container {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.payment-fields {
+  margin-top: 20px;
+}

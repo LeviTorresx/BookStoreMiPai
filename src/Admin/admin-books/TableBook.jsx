@@ -10,18 +10,15 @@ export default function TableBook() {
   const [books, setBooks] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
-  const [filteredBooks, setFilteredBooks] = useState([]);
 
   useEffect(() => {
     loadBooks();
-  }, [filteredBooks]);
+  }, []);
 
   const loadBooks = async () => {
     try {
-      if (filteredBooks.length === 0) {
-        const result = await axios.get(urlBase + "/get-all-books");
-        setBooks(result.data);
-      } else setBooks(filteredBooks);
+      const result = await axios.get(urlBase + "/get-all-books");
+      setBooks(result.data);
     } catch (error) {
       console.error("Error loading books:", error);
     }
@@ -31,7 +28,7 @@ export default function TableBook() {
     const handleDelete = async () => {
       try {
         await axios.delete(`${urlBase}/delete-book?bookId=${Id}`);
-        window.location.reload();
+        setBooks(books.filter((book) => book.bookId !== Id));
       } catch (error) {
         console.error("Error deleting book:", error);
       }
@@ -39,7 +36,7 @@ export default function TableBook() {
 
     Swal.fire({
       title: "¿Estás seguro?",
-      text: "El libro se eliminara por completo",
+      text: "El libro se eliminará por completo",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Eliminar",
@@ -52,7 +49,6 @@ export default function TableBook() {
   };
 
   const openModal = () => {
-    console.log("Abriendo modal");
     setShowModal(true);
   };
 
@@ -60,20 +56,34 @@ export default function TableBook() {
     setShowModal(false);
   };
 
-  const handleEditClick = (selectedBook) => {
-    setSelectedBook(selectedBook);
+  const handleEditClick = (id) => {
+    setSelectedBook(id);
     openModal();
   };
 
   const handleSearch = (searchTerm) => {
-    const filtered = books.filter(
-      (book) =>
-        book.bookName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        book.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        book.bookType.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredBooks(filtered);
+    if (searchTerm.trim() === "") {
+      loadBooks();
+    } else {
+      const filtered = books.filter(
+        (book) =>
+          book.bookName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.bookType.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      if (filtered.length === 0) {
+        Swal.fire({
+          title: "Sin coincidencias",
+          text: "No se encontraron libros que coincidan con los criterios de búsqueda.",
+          icon: "info",
+          confirmButtonText: "Aceptar",
+        });
+      } else {
+        setBooks(filtered);
+      }
+    }
   };
 
   return (
@@ -86,7 +96,7 @@ export default function TableBook() {
       </div>
       <div className="containers text-center"></div>
       <div className="container" style={{ paddingTop: "90px" }}>
-        <table className="table table-striped table-table-hover align-middle">
+        <table className="table table-striped table-hover align-middle">
           <thead className="table-dark">
             <tr className="text-center">
               <th scope="col">Id</th>
@@ -98,13 +108,13 @@ export default function TableBook() {
               <th scope="col">Price</th>
               <th scope="col">Stock</th>
               <th scope="col">Type</th>
-              <th> </th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {books.map((book, index) => (
+            {books.map((book) => (
               <tr
-                key={index}
+                key={book.bookId}
                 className="text-center border border-2 border-dark"
               >
                 <th scope="row">{book.bookId}</th>
@@ -121,7 +131,7 @@ export default function TableBook() {
                 <td className="text-center flex border-0 pt-4">
                   <div>
                     <button
-                      className="button"
+                      className="btn btn-primary mx-2"
                       onClick={() => handleEditClick(book.bookId)}
                     >
                       Edit
@@ -129,10 +139,9 @@ export default function TableBook() {
                   </div>
                   <div>
                     <button
-                      className="button delete"
+                      className="btn btn-danger"
                       onClick={() => deleteBook(book.bookId)}
                     >
-                      {" "}
                       Delete
                     </button>
                   </div>
@@ -142,11 +151,9 @@ export default function TableBook() {
           </tbody>
         </table>
       </div>
-      <div>
-        {showModal && (
-          <ModalEditBooks closeModal={closeModal} booksId={selectedBook} />
-        )}
-      </div>
+      {showModal && (
+        <ModalEditBooks closeModal={closeModal} booksId={selectedBook} />
+      )}
     </div>
   );
 }
