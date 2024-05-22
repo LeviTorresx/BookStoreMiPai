@@ -7,19 +7,19 @@ const userData = getUserData();
   return (
     <div className="bg-body p-4 rounded-top-2">
       <div>
-        <h2>Informacion</h2>
+        <h2 className="fw-bolder">Informacion</h2>
         <div>
-          <div>
+          <div className="fw-bold fs-5">
             Nombre:
-            <span> {userData ? userData.userName : "No disponible"} </span>
+            <span className="fw-light"> {userData ? userData.userName : "No disponible"} {" "} {userData ? userData.lastName : "No disponible"} </span>
           </div>
-          <div>
+          <div className="fw-bold fs-5">
             Email:
-            <span> {userData ? userData.email : "No disponible"}</span>
+            <span className="fw-light"> {userData ? userData.email : "No disponible"}</span>
           </div>
-          <div>
+          <div className="fw-bold fs-5">
             Direccion:
-            <span> {userData ? userData.address : "No disponible"}</span>
+            <span className="fw-light"> {userData ? userData.address : "No disponible"}</span>
           </div>
         </div>
       </div>

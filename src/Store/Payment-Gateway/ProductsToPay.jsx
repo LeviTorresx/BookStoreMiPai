@@ -17,7 +17,7 @@ export default function ProductsToPay() {
   return (
     <div className="bg-body p-4 rounded-2">
       <div>
-        <h1>Productos</h1>
+        <h1 className="fw-bolder">Productos</h1>
         <h3>Total a pagar: {totalPrice.toLocaleString("es-CO", { style: "currency", currency: "COP" })}</h3>
       </div>
 

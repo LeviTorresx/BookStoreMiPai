@@ -139,7 +139,7 @@ export default function PaymentMethods() {
 
   return (
     <div className="p-4 bg-body rounded-bottom-2 ">
-      <h5>Selecciona un Método de Pago</h5>
+      <h5 className="fw-bold fs-3">Selecciona un Método de Pago</h5>
       <div>
         <form className="flex p-2">
           <div className="m-3">

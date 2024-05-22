@@ -522,6 +522,7 @@ select {
   margin-top: 20px;
 }
 
+<<<<<<< HEAD
 .footer-separator {
   border: none;
   border-top: 1px solid #fff;
@@ -536,3 +537,9 @@ select {
   background-clip: padding-box;
   box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
 }
+=======
+.container-visualizer{
+  max-height: 200px;
+  overflow-y: auto;
+}
+>>>>>>> 692e3f645eceec19d5e42e27809e1363dae1e0c7
