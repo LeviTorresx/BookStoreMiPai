@@ -12,6 +12,17 @@ export default function PaymentPage() {
   const [totalAmount, setTotalAmount] = useState(0); // Nuevo estado para el total a pagar
   let navigate = useNavigate();
 
+  const orderDate = new Date();
+
+  const formatDate = (date) => {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Los meses son de 0 a 11
+    const year = String(date.getFullYear()).slice(-2); // Tomar los últimos 2 dígitos del año
+    return `${day}/${month}/${year}`;
+  };
+
+  const formattedDate = formatDate(orderDate);
+
   const handleExit = () => {
     Swal.fire({
       title: "¿Estás seguro?",
@@ -37,19 +48,17 @@ export default function PaymentPage() {
 
     const bookOrderDto = {
       orderValue: totalAmount,
-      orderDate: new Date().toISOString,
       userId: user.userId,
     };
 
-    const requestData ={
+    const requestData = {
       bookOrderDto: bookOrderDto,
-      books: books
+      books: books,
+      date: formattedDate,
     };
 
     try {
-      await axios.post(
-        "http://localhost:8080/book-orders/save-book-order", requestData
-      );
+      //await axios.post("http://localhost:8080/book-orders/save-book-order",requestData);
       console.log(requestData);
       Swal.fire(
         "Pago exitoso",
