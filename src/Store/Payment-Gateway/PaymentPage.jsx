@@ -5,6 +5,7 @@ import Information from "./Informartion";
 import ProductsToPay from "./ProductsToPay";
 import PaymentMethods from "./PaymentMethods";
 import { getUserData } from "../../utils/GetUser";
+import axios from "axios";
 
 export default function PaymentPage() {
   const [user, setUser] = useState(getUserData());
@@ -29,32 +30,26 @@ export default function PaymentPage() {
 
   const handlePayment = async () => {
     const booksShipping = JSON.parse(localStorage.getItem("booksShipping"));
-    const bookDetails = booksShipping.map((book) => ({
-      id: book.id,
+    const books = booksShipping.map((book) => ({
+      bookId: book.bookId,
       quantity: book.quantity,
     }));
 
-    const paymentData = {
-      userId: user.userId,
-      date: new Date().toISOString(),
-      total: totalAmount, // Usar el totalAmount calculado
-    };
+    const bookOrderDto = {
+      orderValue: totalAmount,
+      orderDate: new Date(),  
+      userId: user.userId
+    };  
 
     try {
-      const response = "";
-
-      if (!response.ok) {
-        throw new Error("Error en la petición");
-      }
-
-      const data = await response.json();
-      // Manejar la respuesta del backend
+      await axios.post("http://localhost:8080/book-orders/save-book-order", bookOrderDto,books);
+      console.log(bookOrderDto, books);
       Swal.fire(
         "Pago exitoso",
         "Tu pago ha sido procesado correctamente",
         "success"
       );
-      navigate("/success"); // Redirigir a la página de éxito
+      //navigate("/");
     } catch (error) {
       console.error("Error:", error);
       Swal.fire("Error", "Hubo un problema al procesar el pago", "error");
