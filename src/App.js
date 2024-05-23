@@ -13,6 +13,7 @@ import AboutUs from "./Store/AboutUs";
 import { useState } from "react";
 import { getUserData } from "./utils/GetUser";
 import ComingSoo from "./Store/Coming-soon/ComingSoo";
+import TableShipping from "./Admin/admin-shipping/TableShipping";
 
 function App() {
   const [user, setUser] = useState(getUserData());
@@ -44,6 +45,8 @@ function App() {
               path="/admin/book-register"
               element={<BookRegister />}
             />
+
+            <Route exact path="/admin/order-shipping" element={<TableShipping/>}/>
             <Route exact path="/admin/clientTable" element={<ClientsTable />} />
           </Route>
         </Routes>

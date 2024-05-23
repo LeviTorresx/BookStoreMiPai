@@ -6,10 +6,13 @@ import ProductsToPay from "./ProductsToPay";
 import PaymentMethods from "./PaymentMethods";
 import { getUserData } from "../../utils/GetUser";
 import axios from "axios";
+import Invoice from "../../utils/Invoice";
 
 export default function PaymentPage() {
   const [user, setUser] = useState(getUserData());
-  const [totalAmount, setTotalAmount] = useState(0); // Nuevo estado para el total a pagar
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [booksSell, setBooksSell] = useState(null);
+  const [showInvoiceModal, setShowInvoiceModal] = useState(false);
   let navigate = useNavigate();
 
   const orderDate = new Date();
@@ -41,6 +44,7 @@ export default function PaymentPage() {
 
   const handlePayment = async () => {
     const booksShipping = JSON.parse(localStorage.getItem("booksShipping"));
+    setBooksSell(booksShipping);
     const books = booksShipping.map((book) => ({
       bookId: book.bookId,
       quantity: book.quantity,
@@ -65,7 +69,7 @@ export default function PaymentPage() {
         "Tu pago ha sido procesado correctamente",
         "success"
       );
-      //navigate("/");
+      setShowInvoiceModal(true);
     } catch (error) {
       console.error("Error:", error);
       Swal.fire("Error", "Hubo un problema al procesar el pago", "error");
@@ -93,6 +97,30 @@ export default function PaymentPage() {
             </div>
           </div>
         </div>
+        {showInvoiceModal && (
+          <div
+            className="modal fade show pt-5 bg-secondary bg-opacity-50"
+            tabIndex="-1"
+            style={{ display: "block" }}
+          >
+            <div className="modal-dialog modal-lg">
+              <div className="modal-content p-3">
+                <button
+                  className="btn-close"
+                  onClick={() => setShowInvoiceModal(false)}
+                >
+                  &times;
+                </button>
+                <Invoice
+                  booksShipping={booksSell}
+                  totalAmount={totalAmount}
+                  formattedDate={formattedDate}
+                  client={user}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
