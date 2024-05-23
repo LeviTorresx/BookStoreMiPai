@@ -4,9 +4,20 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+/**
+ * Componente Register
+ *
+ * Este componente permite a los usuarios registrarse en el sistema proporcionando sus datos personales.
+ * Incluye validación de usuarios existentes y muestra notificaciones al usuario sobre el éxito o fallo del registro.
+ */
+
 export default function Register() {
+  // Hook para la navegación
   let navegacion = useNavigate();
-  const defaultCountry = "CO"; // País preseleccionado
+  // País predeterminado para el selector
+  const defaultCountry = "CO";
+
+  // Estado inicial del formulario de usuario
   const [user, setUser] = useState({
     userName: "",
     lastName: "",
@@ -15,9 +26,10 @@ export default function Register() {
     userType: "CLIENT",
     phoneNumber: "",
     address: "",
-    showAdditionalInfo: false, // Agregamos el estado para mostrar información adicional
+    showAdditionalInfo: false, // Estado para mostrar información adicional
   });
 
+  // Lista de países y sus códigos de marcado
   const countries = [
     { code: "AR", name: "Argentina", dialCode: "+54" },
     { code: "BO", name: "Bolivia", dialCode: "+591" },
@@ -33,6 +45,9 @@ export default function Register() {
     { code: "VE", name: "Venezuela", dialCode: "+58" },
   ];
 
+  /**
+   * Alterna la visibilidad de la información adicional.
+   */
   const toggleAdditionalInfo = () => {
     setUser({
       ...user,
@@ -40,10 +55,20 @@ export default function Register() {
     });
   };
 
+  /**
+   * Maneja los cambios en los inputs del formulario.
+   *
+   * @param {Object} e - Evento de cambio del input.
+   */
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  /**
+   * Maneja el envío del formulario de registro.
+   *
+   * @param {Object} e - Evento de envío del formulario.
+   */
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -61,7 +86,7 @@ export default function Register() {
       // Si el usuario no existe, procedemos con el registro
       const urlBase = "http://localhost:8080/users/save-user";
       await axios.post(urlBase, user);
-      // redirigimos a la página de inicio de sesión
+      // Redirigimos a la página de inicio de sesión
       Swal.fire({
         icon: "success",
         title: "Has creado tu cuenta",
@@ -71,7 +96,12 @@ export default function Register() {
     }
   };
 
-  // Función para verificar si el usuario ya existe en la base de datos
+  /**
+   * Verifica si el usuario ya existe en la base de datos.
+   *
+   * @param {string} email - El correo electrónico del usuario.
+   * @returns {boolean} - Retorna true si el usuario existe, de lo contrario false.
+   */
   const checkUserExists = async (email) => {
     const url = `http://localhost:8080/users/exist-email?email=${encodeURIComponent(
       email
@@ -85,6 +115,7 @@ export default function Register() {
     }
   };
 
+  // Destructuración del estado del usuario
   const {
     userName,
     lastName,
@@ -107,7 +138,6 @@ export default function Register() {
                 className="fw-semibold text-center"
                 style={{ color: "black" }}
               >
-                {" "}
                 Are you new here?
               </h2>
             </div>

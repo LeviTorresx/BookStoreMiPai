@@ -3,19 +3,29 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import VisualizerBook from "./VisualizerBook";
 
+/**
+ * Componente para mostrar un libro específico en la tienda.
+ * 
+ * @param {Object} book - Objeto que representa el libro.
+ * @param {Function} addToCart - Función para agregar el libro al carrito.
+ * @returns {JSX.Element} El elemento JSX que representa el libro en la tienda.
+ */
 export default function Books({ book, addToCart }) {
 
   const [statusModal, setStatusModal] = useState(false);
   const [visualizerBook, setVisualizerBook] = useState(null);
 
+  // Función para abrir el modal
   const openModal = () => {
     setStatusModal(true);
   };
 
+  // Función para cerrar el modal
   const closeModal = () => {
     setStatusModal(false);
   };
 
+  // Función para abrir el visualizador de libro
   const handleOpenPrevizualizer = (book) =>{
     setVisualizerBook(book);
     openModal();
@@ -54,12 +64,14 @@ export default function Books({ book, addToCart }) {
           </h2>
           <div className="flex justify-content-between"> 
             <p>{book.author}</p>
+            {/* Botón para abrir el visualizador de libro */}
             <button className="btn btn-ico mb-2 px-2 py-0" onClick={() => handleOpenPrevizualizer(book)}>
               <FaEye />
             </button>
           </div>
 
           <div className="text-center">
+            {/* Botón para agregar al carrito */}
             <button
               className="btn-cart w-100 p-2"
               onClick={() => addToCart(book)}
@@ -71,6 +83,7 @@ export default function Books({ book, addToCart }) {
         </div>
       </div>
 
+      {/* Renderizar el visualizador de libro si el modal está abierto */}
       {statusModal && (
         <VisualizerBook closeModal={closeModal} book={visualizerBook} addCart={addToCart} />
       )}

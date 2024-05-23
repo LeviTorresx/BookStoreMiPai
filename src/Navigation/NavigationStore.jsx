@@ -22,20 +22,23 @@ export default function NavigationStore({
   availableBooks,
   onFilteredBooks,
 }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  let navegacion = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para verificar si el usuario está autenticado
+  const [showProfile, setShowProfile] = useState(false); // Estado para controlar la visibilidad del perfil de usuario
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
+  const [suggestions, setSuggestions] = useState([]); // Estado para las sugerencias de búsqueda
+  let navegacion = useNavigate(); // Hook de navegación de React Router
 
+  // Actualiza el estado de autenticación cuando cambia la prop 'userLog'
   useEffect(() => {
     setIsLoggedIn(userLog);
   }, [userLog]);
 
+  // Cierra el perfil de usuario
   const handleClose = () => {
     setShowProfile(false);
   };
 
+  // Maneja el cierre de sesión del usuario
   const handleLogout = () => {
     Swal.fire({
       title: "¿Estás seguro?",
@@ -48,24 +51,27 @@ export default function NavigationStore({
       if (result.isConfirmed) {
         setIsLoggedIn(false);
         localStorage.removeItem("userData");
-        window.location.reload();
+        window.location.reload(); // Recarga la página después de cerrar la sesión
       }
     });
   };
 
+  // Maneja el clic en el icono de usuario
   const handleUserClick = () => {
     if (isLoggedIn) {
-      setShowProfile(true);
+      setShowProfile(true); // Muestra el perfil de usuario si está autenticado
     } else {
-      navegacion("/login"); // Redirigir al usuario al inicio de sesión si no está autenticado
+      navegacion("/login"); // Redirige al usuario al inicio de sesión si no está autenticado
     }
   };
 
+  // Maneja el cambio en el término de búsqueda
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
 
     if (value.length > 0) {
+      // Filtra los libros disponibles según el término de búsqueda
       const filteredBooks = availableBooks.filter((book) =>
         book.bookName.toLowerCase().includes(value.toLowerCase())
       );
@@ -75,11 +81,13 @@ export default function NavigationStore({
     }
   };
 
+  // Maneja el clic en una sugerencia de búsqueda
   const handleSuggestionClick = (title) => {
     setSearchTerm(title);
     setSuggestions([]);
   };
 
+  // Destaca las coincidencias en el texto de la sugerencia de búsqueda
   const highlightMatch = (text, query) => {
     const parts = text.split(new RegExp(`(${query})`, "gi"));
     return (
@@ -97,6 +105,7 @@ export default function NavigationStore({
     );
   };
 
+  // Maneja la búsqueda de libros
   const handleSearchBook = () => {
     if (searchTerm.length > 0) {
       const filteredBooks = availableBooks.filter((book) =>

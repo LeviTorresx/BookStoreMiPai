@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
+// Componente para editar libros en un modal
 export default function ModalEditBooks({ closeModal, booksId }) {
   const urlBase = "http://localhost:8080/books/get-book";
 
+  // Estado para almacenar los datos del libro
   const [book, setBook] = useState({
     bookName: "",
     author: "",
@@ -17,6 +19,7 @@ export default function ModalEditBooks({ closeModal, booksId }) {
     bookImage: "",
   });
 
+  // Desestructuración de los datos del libro
   const {
     bookName,
     author,
@@ -29,6 +32,7 @@ export default function ModalEditBooks({ closeModal, booksId }) {
     bookImage,
   } = book;
 
+  // Categorías disponibles
   const categories = [
     "Ficción contemporánea",
     "Literatura clásica",
@@ -45,6 +49,7 @@ export default function ModalEditBooks({ closeModal, booksId }) {
     "Autoayuda y desarrollo personal",
   ];
 
+  // Función para enviar los cambios al servidor
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -52,25 +57,24 @@ export default function ModalEditBooks({ closeModal, booksId }) {
         `http://localhost:8080/books/edit-book?bookId=${booksId}`,
         book
       );
-      Swal.fire(
-        "Cambio exitoso",
-        "Cambio procesado con exito",
-        "success"
-      );
-      loadsBook();
+      Swal.fire("Cambio exitoso", "Cambio procesado con éxito", "success");
+      loadBook();
     } catch (error) {
       console.error("Error al guardar el libro:", error);
     }
   };
 
+  // Función para manejar cambios en los campos del formulario
   const onInputChange = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
   };
 
-  const loadsBook = async () => {
+  // Función para cargar los datos del libro desde el servidor
+  const loadBook = async () => {
     try {
       const response = await axios.get(`${urlBase}?bookId=${booksId}`);
 
+      // Convertir el tipo de libro a código
       let typeCode;
       if (response.data.bookType === "PHYSICAL") {
         typeCode = 0;
@@ -80,6 +84,7 @@ export default function ModalEditBooks({ closeModal, booksId }) {
         console.log("type null");
       }
 
+      // Almacenar los datos del libro en el estado
       const bookData = {
         ...response.data,
         bookType: typeCode,
@@ -91,10 +96,10 @@ export default function ModalEditBooks({ closeModal, booksId }) {
     }
   };
 
+  // Cargar los datos del libro al montar el componente
   useEffect(() => {
-    loadsBook();
+    loadBook();
   }, []);
-
   return (
     <div className="modal fade show" tabIndex="-1" style={{ display: "block" }}>
       <div className="modal-dialog modal-lg">

@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 export default function SideBar({ administratorAccess }) {
   const location = useLocation();
 
+  // Función para verificar si el usuario tiene acceso de administrador
   const access = () => {
     return administratorAccess === "ADMINISTRATOR";
   };
@@ -18,7 +19,8 @@ export default function SideBar({ administratorAccess }) {
     <div>
       <div className="sidebar bg-light">
         <ul>
-          {location.pathname === '/about-us' &&(
+          {/* Mostrar el enlace de "Volver a la tienda" solo cuando la ubicación es '/about-us' */}
+          {location.pathname === '/about-us' && (
             <li>
               <a href="/">
                 <img src="./logoMipaiBookstore2.png" alt="Logo" width="40" style={{marginLeft: '-5px'}} />
@@ -27,12 +29,15 @@ export default function SideBar({ administratorAccess }) {
             </li>
           )}
 
+          {/* Mostrar el enlace de "Zona de administración" solo si el usuario tiene acceso de administrador */}
           {access() && (
             <li>
               <a href="/admin/book-tableContent">
-              <RiAdminFill size={"30"} /><span>Zona de administración</span></a>
+                <RiAdminFill size={"30"} /><span>Zona de administración</span>
+              </a>
             </li>
           )}
+          {/* Enlaces para diferentes secciones de la tienda */}
           <li>
             <a href="/comingSoon">
               <FaBook size={"30"} /> <span> Categorias</span>
