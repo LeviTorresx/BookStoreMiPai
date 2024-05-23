@@ -12,9 +12,9 @@ export default function Footer() {
           <img src="./logoMipaiBookstoreFull.png" alt="" width={"180"} />
         </div>
         <div>
-          <h4 className="fw-bold"> Nuestra tienda</h4>
+          <h4 className="fw-bold"> Repositorio</h4>
           <h5>
-            <a href="https://github.com/LeviTorresx">Sobre nosotros</a>
+            <a href="https://github.com/LeviTorresx">GitHub</a>
           </h5>
         </div>
         <div>

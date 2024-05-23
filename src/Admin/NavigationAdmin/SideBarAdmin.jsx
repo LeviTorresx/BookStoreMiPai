@@ -8,8 +8,6 @@ import { FaTruckArrowRight } from "react-icons/fa6";
 export default function SideBar() {
   return (
     <div>
-
-      
       <div className="sidebar-admin bg-light">
         <ul>
           <li>
@@ -28,7 +26,7 @@ export default function SideBar() {
             </a>
           </li>
           <li>
-            <a href="/settings">
+            <a href="/comingSoon">
               <FaTruckArrowRight size={"30"} /> <span> Envíos</span>
             </a>
           </li>
@@ -39,7 +37,6 @@ export default function SideBar() {
           </li>
         </ul>
       </div>
-
     </div>
   )
 }

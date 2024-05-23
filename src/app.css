@@ -3,7 +3,7 @@ body {
 }
 
 .bg-container {
-  background-color: rgba(255, 255, 255, 0.2)
+  background-color: rgba(255, 255, 255, 0.3)
 
 }
 
@@ -561,4 +561,10 @@ select {
   transform: scale(1.2);
 }
 
+.img-team{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin: 0 20px;
+}
 
