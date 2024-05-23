@@ -82,7 +82,7 @@ export default function ShoppingCart({
             {/* Botones para cerrar el carrito y proceder con la compra */}
             <div className="pt-4">
               <button className="button" onClick={toggle}>
-                Close
+                Cerrar
               </button>
               <button className="button" onClick={handleBuy}>
                 Comprar

@@ -91,7 +91,7 @@ export default function PaymentPage() {
 
   return (
     <div className="bg-login">
-      <h1 className="text-center py-3 text-white">PaymentPage</h1>
+      <h1 className="text-center py-3 text-white">Proceso de pago</h1>
       <div className="flex justify-content-center p-4">
         <div className="m-3">
           {/* Componente para mostrar los productos a pagar */}

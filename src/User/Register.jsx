@@ -138,17 +138,17 @@ export default function Register() {
                 className="fw-semibold text-center"
                 style={{ color: "black" }}
               >
-                Are you new here?
+                ¿Eres nuevo aquí?
               </h2>
             </div>
           </div>
           <div className="register-form-container w-50">
-            <h2 className="container-button">Register</h2>
+            <h2 className="container-button">Registro</h2>
             <form onSubmit={(e) => onSubmit(e)}>
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder="Name"
+                  placeholder="Nombre"
                   name="userName"
                   value={userName}
                   onChange={(e) => onInputChange(e)}
@@ -158,7 +158,7 @@ export default function Register() {
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder="LastName"
+                  placeholder="Apellido"
                   name="lastName"
                   value={lastName}
                   onChange={(e) => onInputChange(e)}
@@ -168,7 +168,7 @@ export default function Register() {
               <div className="form-group">
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder="Correo"
                   name="email"
                   value={email}
                   onChange={(e) => onInputChange(e)}
@@ -177,8 +177,8 @@ export default function Register() {
               </div>
               <div className="form-group">
                 <input
-                  type="text"
-                  placeholder="Password"
+                  type="password"
+                  placeholder="Contraseña"
                   name="userPassword"
                   value={userPassword}
                   onChange={(e) => onInputChange(e)}
@@ -201,7 +201,7 @@ export default function Register() {
                 </select>
                 <input
                   type="tel"
-                  placeholder="Phone Number"
+                  placeholder="Número de teléfono"
                   name="phoneNumber"
                   value={phoneNumber}
                   onChange={(e) => onInputChange(e)}
@@ -212,14 +212,14 @@ export default function Register() {
                 className="additional-info-toggle container-button"
                 onClick={toggleAdditionalInfo}
               >
-                {user.showAdditionalInfo ? "-" : "+"} Additional information
+                {user.showAdditionalInfo ? "-" : "+"} Información adicional
               </div>
               {user.showAdditionalInfo && (
                 <>
                   <div className="form-group">
                     <input
                       type="text"
-                      placeholder="Address/City/PostalCode"
+                      placeholder="Dirección/Ciudad/Código postal"
                       name="address"
                       value={address}
                       onChange={(e) => onInputChange(e)}
@@ -230,7 +230,7 @@ export default function Register() {
               )}
               <div className="container-button">
                 <button className="button" type="submit">
-                  Sign in
+                  Registrarse
                 </button>
               </div>
             </form>

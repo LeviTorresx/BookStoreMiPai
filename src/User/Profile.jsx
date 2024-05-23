@@ -31,7 +31,7 @@ export default function Profile({
           <div className="pt-4">
             {/* Botón para cerrar el perfil */}
             <button className="button" onClick={toggleProfile}>
-              Close
+              Cerrar
             </button>
             {/* Botón para cerrar sesión */}
             <button className="button" onClick={handleLogOut}>

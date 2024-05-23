@@ -22,6 +22,9 @@ export default function NavBarAdmin({ onSearch }) {
       case "/admin/clientTable":
         setPageTitle("CRUD de clientes");
         break;
+      case "/admin/order-shipping":
+        setPageTitle("Registro de envíos");
+        break;
       default:
         setPageTitle("Zona de administración");
     }
