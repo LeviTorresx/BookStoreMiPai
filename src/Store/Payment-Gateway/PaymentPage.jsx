@@ -37,13 +37,21 @@ export default function PaymentPage() {
 
     const bookOrderDto = {
       orderValue: totalAmount,
-      orderDate: new Date(),  
-      userId: user.userId
-    };  
+      orderDate: new Date().toISOString,
+      userId: user.userId,
+    };
+
+    const requestData = {
+      bookOrderDto: bookOrderDto,
+      books: books,
+    };
 
     try {
-      await axios.post("http://localhost:8080/book-orders/save-book-order", bookOrderDto,books);
-      console.log(bookOrderDto, books);
+      await axios.post(
+        "http://localhost:8080/book-orders/save-book-order",
+        requestData
+      );
+      console.log(requestData);
       Swal.fire(
         "Pago exitoso",
         "Tu pago ha sido procesado correctamente",
