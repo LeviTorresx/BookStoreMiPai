@@ -2,9 +2,9 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.bg-container-log {
-  height: 100vh;
-  background: linear-gradient(to bottom right, #b6ccd7, #faa591);
+.bg-container {
+  background-color: rgba(255, 255, 255, 0.2)
+
 }
 
 .bg-login {
@@ -385,7 +385,7 @@ select {
 
 .btn-cart:hover {
   transition: 0.2s;
-  color: black;
+  color: white;
   background-color: #008bd1;
 }
 
@@ -528,11 +528,37 @@ select {
   margin: 20px 0;
 }
 
-.mask-custom {
-  background: rgba(24, 24, 16, .2);
-  border-radius: 2em;
-  backdrop-filter: blur(25px);
-  border: 2px solid rgba(255, 255, 255, 0.05);
-  background-clip: padding-box;
-  box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+.thead th {
+  color: #fff;
+  background-color: #008bd1;  
+  padding: 20px;
+  font-size: 16px;
 }
+
+.rounded-table {
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: solid #000;
+}
+
+.container-visualizer{
+  overflow-y: auto;
+  max-height: 200px;
+}
+
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+.content-comingSoon {
+  text-align: center;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.content-comingSoon:hover{
+  transform: scale(1.2);
+}
+
+
