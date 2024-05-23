@@ -15,7 +15,7 @@ export default function ElementsCart({
         <li className="text-black border border-2 border-black rounded p-2">
           <div className="d-flex mb-1">
             <div className="flex p-1">
-              <img src={book.bookImage} alt="books" width={"120px"} />
+              <img src={book.bookImage} alt="books" width={"120px"} className="rounded-3"/>
             </div>
             <div className="">
               <h5 className="text-start m-2 fs-6">{book.bookName}</h5>

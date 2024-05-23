@@ -61,9 +61,9 @@ export default function ClientsTable() {
           <SideBarAdmin />
         </div>
         <div className="container" style={{ paddingTop: "90px" }}>
-          <table className="table table-striped table-hover align-middle">
-            <thead className="table-dark">
-              <tr>
+          <table className="table table-borderless rounded-table border">
+            <thead className="thead">
+              <tr className="text-center">
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
@@ -74,7 +74,7 @@ export default function ClientsTable() {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user.userId}>
+                <tr key={user.userId} className="text-center">
                   <th scope="row">{user.userId}</th>
                   <td>{user.userName}</td>
                   <td>{user.lastName}</td>
@@ -82,12 +82,6 @@ export default function ClientsTable() {
                   <td>{user.phoneNumber}</td>
                   <td className="text-center">
                     <div>
-                      <Link
-                        to={`/user/${user.userId}`}
-                        className="btn btn-primary btn-sm me-3"
-                      >
-                        Edit
-                      </Link>
                       <button
                         className="btn btn-danger btn-sm"
                         onClick={() => deleteClient(user.userId)}

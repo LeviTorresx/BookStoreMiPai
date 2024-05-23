@@ -26,7 +26,7 @@ export default function Books({ book, addToCart }) {
       <div className="bg-white img-book rounded border border-2 border-black">
         <div className="flex justify-content-center border-bottom border-2 border-black p-2">
           <img
-            className="px-1 my-3"
+            className="px-1 my-3 rounded-4"
             src={book.bookImage}
             width={"300px"}
             alt="x"

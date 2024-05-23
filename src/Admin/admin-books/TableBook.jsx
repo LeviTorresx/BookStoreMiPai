@@ -87,69 +87,71 @@ export default function TableBook() {
   };
 
   return (
-    <div className="bg-login z-3">
+    <div className="z-3">
       <div className="w-100">
         <NavBarAdmin onSearch={handleSearch} />
       </div>
       <div className="flex z-2 position-fixed">
         <SideBarAdmin />
       </div>
-      <div className="containers text-center"></div>
-      <div className="container" style={{ paddingTop: "90px" }}>
-        <table className="table align-middle">
-          <thead className="table-dark">
-            <tr className="text-center">
-              <th scope="col">Id</th>
-              <th scope="col">Imagen</th>
-              <th scope="col">Nombre del libro</th>
-              <th scope="col">Editorial</th>
-              <th scope="col">Autor</th>
-              <th scope="col">Categoría</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Tipo</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book) => (
-              <tr
-                key={book.bookId}
-                className="text-center border border-2 border-dark"
-              >
-                <th scope="row">{book.bookId}</th>
-                <td>
-                  <img src={book.bookImage} alt="img-book" width={"100px"} />
-                </td>
-                <td>{book.bookName}</td>
-                <td>{book.editorial}</td>
-                <td>{book.author}</td>
-                <td>{book.category}</td>
-                <td>{book.price}</td>
-                <td>{book.quantity}</td>
-                <td>{book.bookType}</td>
-                <td className="text-center flex border-0" style={{ paddingTop: "35px" }}>
-
-                  <button
-                    className="btn btn-primary mx-2"
-                    onClick={() => handleEditClick(book.bookId)}
-                  >
-                    Edit
-                  </button>
-
-
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteBook(book.bookId)}
-                  >
-                    Delete
-                  </button>
-
-                </td>
+      <div className="">
+        <div className="text-center"></div>
+        <div className="container" style={{ paddingTop: "90px" }}>
+          <table className="table table-borderless rounded-table border">
+            <thead className="thead">
+              <tr className="text-center">
+                <th scope="col">Id</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Nombre del libro</th>
+                <th scope="col">Editorial</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {books.map((book) => (
+                <tr key={book.bookId} className="text-center">
+                  <th scope="row">{book.bookId}</th>
+                  <td>
+                    <img
+                      src={book.bookImage}
+                      alt="img-book"
+                      width={"100px"}
+                      className="rounded-3"
+                    />
+                  </td>
+                  <td>{book.bookName}</td>
+                  <td>{book.editorial}</td>
+                  <td>{book.author}</td>
+                  <td>{book.category}</td>
+                  <td>{book.price}</td>
+                  <td>{book.quantity}</td>
+                  <td>{book.bookType}</td>
+                  <td className="text-center">
+                    <div className="flex">
+                      <button
+                        className="btn btn-primary mx-2"
+                        onClick={() => handleEditClick(book.bookId)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => deleteBook(book.bookId)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       {showModal && (
         <ModalEditBooks closeModal={closeModal} booksId={selectedBook} />

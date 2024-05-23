@@ -23,22 +23,22 @@ export default function SideBar({ administratorAccess }) {
             </li>
           )}
           <li>
-            <a href="/home">
+            <a href="/comingSoon">
               <FaBook size={"30"} /> <span> Categorias</span>
             </a>
           </li>
           <li>
-            <a href="/profile">
+            <a href="/comingSoon">
               <FaFireAlt size={"30"} /> <span> Destacados</span>
             </a>
           </li>
           <li>
-            <a href="/settings">
+            <a href="/comingSoon">
               <FaCheckCircle size={"30"} /> <span> Recomendados</span>
             </a>
           </li>
           <li>
-            <a href="/settings">
+            <a href="/comingSoon">
               <FaPercentage size={"30"} /> <span> En descuento</span>
             </a>
           </li>

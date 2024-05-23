@@ -11,6 +11,7 @@ import ProtectedRouteAdmin from "./utils/protectedRouteAdmin";
 import PaymentPage from "./Store/Payment-Gateway/PaymentPage";
 import { useState } from "react";
 import { getUserData } from "./utils/GetUser";
+import ComingSoo from "./Store/Coming-soon/ComingSoo";
 
 function App() {
   const [user, setUser] = useState(getUserData());
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Store />} />
           <Route exact path="/payment" element={<PaymentPage />} />
+          <Route exact path="/comingSoon" element={<ComingSoo/>}/>
 
           <Route element={<ProtectedRoute canActivate={user} redirect={"/"} />}>
             <Route path="/login" element={<Login />} />

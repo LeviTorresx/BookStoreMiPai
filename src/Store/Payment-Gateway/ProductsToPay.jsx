@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function ProductsToPay() {
+export default function ProductsToPay({ setTotalAmount }) {
   const [booksToPay, setBooksToPay] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -9,10 +9,11 @@ export default function ProductsToPay() {
     const booksShipping = JSON.parse(localStorage.getItem("booksShipping"));
     if (booksShipping) {
       setBooksToPay(booksShipping);
-      const total = booksShipping.reduce((acc, book) => acc + book.price, 0);
+      const total = booksShipping.reduce((acc, book) => acc + book.price * book.quantity, 0);
       setTotalPrice(total);
+      setTotalAmount(total); // Llamar a la función pasada desde el padre para actualizar el total
     }
-  }, []);
+  }, [setTotalAmount]);
 
   return (
     <div className="bg-body p-4 rounded-2">
@@ -37,4 +38,3 @@ export default function ProductsToPay() {
     </div>
   );
 }
-
