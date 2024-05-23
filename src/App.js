@@ -24,8 +24,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Store />} />
           <Route exact path="/payment" element={<PaymentPage />} />
-          <Route exact path="/about-us" element={<AboutUs/>} />
-          <Route exact path="/comingSoon" element={<ComingSoo/>}/>
+          <Route exact path="/about-us" element={<AboutUs />} />
+          <Route exact path="/comingSoon" element={<ComingSoo />} />
 
           <Route element={<ProtectedRoute canActivate={user} redirect={"/"} />}>
             <Route path="/login" element={<Login />} />
@@ -46,7 +46,11 @@ function App() {
               element={<BookRegister />}
             />
 
-            <Route exact path="/admin/order-shipping" element={<TableShipping/>}/>
+            <Route
+              exact
+              path="/admin/order-shipping"
+              element={<TableShipping />}
+            />
             <Route exact path="/admin/clientTable" element={<ClientsTable />} />
           </Route>
         </Routes>

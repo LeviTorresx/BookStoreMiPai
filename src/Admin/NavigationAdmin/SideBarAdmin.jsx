@@ -26,7 +26,7 @@ export default function SideBar() {
             </a>
           </li>
           <li>
-            <a href="/comingSoon">
+            <a href="/admin/order-shipping">
               <FaTruckArrowRight size={"30"} /> <span> Envíos</span>
             </a>
           </li>

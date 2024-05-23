@@ -62,14 +62,18 @@ export default function PaymentPage() {
     };
 
     try {
-      await axios.post("http://localhost:8080/book-orders/save-book-order",requestData);
-      console.log(requestData);
+      await axios.post(
+        "http://localhost:8080/book-orders/save-book-order",
+        requestData
+      );
       Swal.fire(
         "Pago exitoso",
         "Tu pago ha sido procesado correctamente",
         "success"
       );
       setShowInvoiceModal(true);
+      localStorage.removeItem("booksShipping");
+      navigate("/");
     } catch (error) {
       console.error("Error:", error);
       Swal.fire("Error", "Hubo un problema al procesar el pago", "error");

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function ModalEditBooks({ closeModal, booksId }) {
   const urlBase = "http://localhost:8080/books/get-book";
@@ -51,7 +52,11 @@ export default function ModalEditBooks({ closeModal, booksId }) {
         `http://localhost:8080/books/edit-book?bookId=${booksId}`,
         book
       );
-
+      Swal.fire(
+        "Cambio exitoso",
+        "Cambio procesado con exito",
+        "success"
+      );
       loadsBook();
     } catch (error) {
       console.error("Error al guardar el libro:", error);
