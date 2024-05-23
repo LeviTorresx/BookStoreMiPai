@@ -73,7 +73,6 @@ export default function PaymentPage() {
       );
       setShowInvoiceModal(true);
       localStorage.removeItem("booksShipping");
-      navigate("/");
     } catch (error) {
       console.error("Error:", error);
       Swal.fire("Error", "Hubo un problema al procesar el pago", "error");

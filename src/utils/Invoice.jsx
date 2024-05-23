@@ -1,58 +1,78 @@
 import React from "react";
 import { jsPDF } from "jspdf";
+import { useNavigate } from "react-router-dom";
 
 const Invoice = ({ booksShipping, totalAmount, formattedDate, client }) => {
-    const generatePDF = () => {
-        // Crea un nuevo documento PDF
-        const doc = new jsPDF();
-    
-        // Encabezado
-        doc.setFontSize(20);
-        doc.text("Factura", 105, 20, null, null, "center");
-    
-        // Logo
-        const logoImg = new Image();
-        logoImg.src = "../logoMipaiBookstoreFull.png";
-        doc.addImage(logoImg, "PNG", 15, 25, 60, 20);
-    
-        // Fecha
-        doc.setFontSize(12);
-        doc.text(formattedDate, 105, 30, null, null, "center");
-    
-        // Datos del cliente
-        doc.setFontSize(12);
-        doc.text(`Nombre: ${client.userName} ${client.lastName}`, 15, 50);
-        doc.text(`Correo: ${client.email}`, 15, 60);
-        doc.text(`Dirección: ${client.address}`, 15, 70);
-    
-        // Contenido de la factura
-        doc.setFontSize(17)
-        doc.text("Libros comprados", 15, 80)
-        let y = 90;
-        booksShipping.forEach((book) => {
-          // Imagen del libro
-          const bookImg = new Image();
-          bookImg.src = book.bookImage;
-          doc.addImage(bookImg, "PNG", 15, y, 30, 40);
-    
-          // Nombre del libro
-          doc.setFontSize(14);
-          doc.text(book.bookName, 50, y + 10);
-    
-          // Cantidad y Precio
-          doc.setFontSize(12);
-          doc.text(`${book.quantity} x ${book.price.toLocaleString("es-CO", { style: "currency", currency: "COP" })}`, 50, y + 20);
-    
-          y += 40; // Ajuste de altura
-        });
-    
-        // Total
-        doc.setFontSize(17)
-        doc.text(`Total: ${totalAmount.toLocaleString("es-CO", { style: "currency", currency: "COP" })}`, 105, y);
-    
-        // Guardar el archivo
-        doc.save("factura-BookStoreMiPai.pdf");
-      };
+  let navigate = useNavigate();
+
+  const returnPage = () => {
+    navigate("/");
+  };
+  const generatePDF = () => {
+    // Crea un nuevo documento PDF
+    const doc = new jsPDF();
+
+    // Encabezado
+    doc.setFontSize(20);
+    doc.text("Factura", 105, 20, null, null, "center");
+
+    // Logo
+    const logoImg = new Image();
+    logoImg.src = "../logoMipaiBookstoreFull.png";
+    doc.addImage(logoImg, "PNG", 15, 25, 60, 20);
+
+    // Fecha
+    doc.setFontSize(12);
+    doc.text(formattedDate, 105, 30, null, null, "center");
+
+    // Datos del cliente
+    doc.setFontSize(12);
+    doc.text(`Nombre: ${client.userName} ${client.lastName}`, 15, 50);
+    doc.text(`Correo: ${client.email}`, 15, 60);
+    doc.text(`Dirección: ${client.address}`, 15, 70);
+
+    // Contenido de la factura
+    doc.setFontSize(17);
+    doc.text("Libros comprados", 15, 80);
+    let y = 90;
+    booksShipping.forEach((book) => {
+      // Imagen del libro
+      const bookImg = new Image();
+      bookImg.src = book.bookImage;
+      doc.addImage(bookImg, "PNG", 15, y, 30, 40);
+
+      // Nombre del libro
+      doc.setFontSize(14);
+      doc.text(book.bookName, 50, y + 10);
+
+      // Cantidad y Precio
+      doc.setFontSize(12);
+      doc.text(
+        `${book.quantity} x ${book.price.toLocaleString("es-CO", {
+          style: "currency",
+          currency: "COP",
+        })}`,
+        50,
+        y + 20
+      );
+
+      y += 40; // Ajuste de altura
+    });
+
+    // Total
+    doc.setFontSize(17);
+    doc.text(
+      `Total: ${totalAmount.toLocaleString("es-CO", {
+        style: "currency",
+        currency: "COP",
+      })}`,
+      105,
+      y
+    );
+
+    // Guardar el archivo
+    doc.save("factura-BookStoreMiPai.pdf");
+  };
 
   return (
     <div id="invoice-content" className="p-2 ">
@@ -118,6 +138,9 @@ const Invoice = ({ booksShipping, totalAmount, formattedDate, client }) => {
 
       <button onClick={generatePDF} className="button">
         Descargar Factura
+      </button>
+      <button className="button" onClick={returnPage}>
+        Finalizar
       </button>
     </div>
   );
