@@ -77,7 +77,7 @@ export default function PaymentPage() {
         title: "Procesando pago",
         text: "Por favor, espera unos momentos...",
         allowOutsideClick: false,
-        timer: 20000, // Tiempo de espera en milisegundos (20 segundos)
+        timer: 30000, // Tiempo de espera en milisegundos (20 segundos)
         showConfirmButton: false,
         willOpen: () => {
           Swal.showLoading();
