@@ -5,17 +5,21 @@ import { SiCashapp } from "react-icons/si";
 import { FaComputer } from "react-icons/fa6";
 
 export default function PaymentMethods() {
+  // Estado para almacenar el método de pago seleccionado
   const [selectedMethod, setSelectedMethod] = useState("");
 
+  // Función para manejar el cambio de método de pago
   const handleMethodChange = (event) => {
     setSelectedMethod(event.target.value);
   };
 
+  // Función para renderizar los campos de pago dependiendo del método seleccionado
   const renderPaymentFields = () => {
     switch (selectedMethod) {
       case "tarjetaCredito":
         return (
           <div>
+            {/* Campos para tarjeta de crédito */}
             <div className="form-group mb-2">
               <label htmlFor="creditCardNumber">Número de Tarjeta</label>
               <input
@@ -57,6 +61,7 @@ export default function PaymentMethods() {
       case "tarjetaDebito":
         return (
           <div>
+            {/* Campo para correo electrónico de Paypal */}
             <div className="form-group mb-2">
               <label htmlFor="paypalEmail">Correo Electrónico</label>
               <input
@@ -71,6 +76,7 @@ export default function PaymentMethods() {
       case "pse":
         return (
           <div>
+            {/* Campos para PSE */}
             <div className="form-group mb-2">
               <label htmlFor="bank">Banco</label>
               <input
@@ -103,6 +109,7 @@ export default function PaymentMethods() {
       case "efecty":
         return (
           <div>
+            {/* Campos para Efecty */}
             <div className="form-group mb-2">
               <label htmlFor="efectyName">Nombre del Remitente</label>
               <input
@@ -136,7 +143,6 @@ export default function PaymentMethods() {
         return null;
     }
   };
-
   return (
     <div className="p-4 bg-body rounded-bottom-2 ">
       <h5 className="fw-bold fs-3">Selecciona un Método de Pago</h5>

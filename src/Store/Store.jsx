@@ -8,6 +8,13 @@ import { getUserData } from "../utils/GetUser";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Componente Store
+ * 
+ * Este componente representa la tienda principal donde los usuarios pueden ver y comprar libros.
+ * 
+ * @returns {JSX.Element} El componente de la tienda.
+ */
 export default function Store() {
   const [userData, setUserData] = useState(getUserData());
   const [isOpen, setIsOpen] = useState(false);
@@ -25,10 +32,21 @@ export default function Store() {
 
   const urlBase = "http://localhost:8080/books/get-all-books";
 
+  /**
+   * Calcula el precio total de un libro en función de su cantidad.
+   * 
+   * @param {Object} book - El libro para calcular el precio total.
+   * @returns {number} El precio total del libro.
+   */
   const calculateTotalPrice = (book) => {
     return book.price * book.quantity;
   };
 
+  /**
+   * Calcula el precio total del carrito sumando el precio total de todos los libros en el carrito.
+   * 
+   * @returns {number} El precio total del carrito.
+   */
   const calculateCartTotal = () => {
     return cartItems.reduce(
       (total, item) => total + calculateTotalPrice(item),
@@ -36,6 +54,11 @@ export default function Store() {
     );
   };
 
+  /**
+   * Maneja la adición de un libro al carrito.
+   * 
+   * @param {Object} book - El libro que se agregará al carrito.
+   */
   const handleAddToCart = (book) => {
     const existingBook = cartItems.find((item) => item.bookId === book.bookId);
     if (existingBook) {
@@ -51,6 +74,11 @@ export default function Store() {
     }
   };
 
+  /**
+   * Maneja la eliminación de un libro del carrito.
+   * 
+   * @param {Object} book - El libro que se eliminará del carrito.
+   */
   const handleRemoveFromCart = (book) => {
     const updatedCartItems = cartItems.filter(
       (item) => item.bookId !== book.bookId
@@ -59,6 +87,11 @@ export default function Store() {
     setCountBooks((prevCount) => prevCount - 1);
   };
 
+  /**
+   * Maneja el aumento de la cantidad de un libro en el carrito.
+   * 
+   * @param {Object} book - El libro para aumentar su cantidad en el carrito.
+   */
   const handleIncreaseQuantity = (book) => {
     const updatedCartItems = cartItems.map((item) =>
       item.bookId === book.bookId
@@ -68,6 +101,11 @@ export default function Store() {
     setCartItems(updatedCartItems);
   };
 
+  /**
+   * Maneja la disminución de la cantidad de un libro en el carrito.
+   * 
+   * @param {Object} book - El libro para disminuir su cantidad en el carrito.
+   */
   const handleDecreaseQuantity = (book) => {
     const updatedCartItems = cartItems.map((item) =>
       item.bookId === book.bookId && item.quantity > 1
@@ -77,6 +115,9 @@ export default function Store() {
     setCartItems(updatedCartItems);
   };
 
+  /**
+   * Carga los libros desde el servidor.
+   */
   const loadBooks = async () => {
     try {
       const result = await axios.get(urlBase);
@@ -88,6 +129,9 @@ export default function Store() {
     }
   };
 
+  /**
+   * Verifica si hay libros en proceso de pago y muestra una alerta al usuario.
+   */
   const checkPaymentStatus = () => {
     const booksShipping = JSON.parse(localStorage.getItem("booksShipping"));
     if (booksShipping && booksShipping.length > 0) {
@@ -111,10 +155,18 @@ export default function Store() {
     }
   };
 
+  /**
+   * Muestra u oculta la barra lateral.
+   */
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  /**
+   * Maneja los libros filtrados y los muestra en la tienda.
+   * 
+   * @param {Array} filteredBooks - Los libros filtrados.
+   */
   const handleFilteredBooks = (filteredBooks) => {
     if (filteredBooks.length === 0) {
       Swal.fire({

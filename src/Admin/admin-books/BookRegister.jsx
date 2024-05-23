@@ -4,8 +4,11 @@ import Swal from "sweetalert2";
 import SideBarAdmin from "../NavigationAdmin/SideBarAdmin";
 import NavBarAdmin from "../NavigationAdmin/NavBarAdmin";
 
+// Componente para registrar un nuevo libro
 export default function BookRegister() {
   const urlBase = "http://localhost:8080/books/save-book";
+
+  // Estado para almacenar los datos del libro
   const [bookData, setBookData] = useState({
     bookName: "",
     author: "",
@@ -32,6 +35,7 @@ export default function BookRegister() {
     }
   };
 
+  // Función para extraer la URL de la imagen desde el código HTML
   const obtenerSrcDesdeHTML = (htmlString) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlString, "text/html");
@@ -49,6 +53,7 @@ export default function BookRegister() {
     return null;
   };
 
+  // Lista de categorías disponibles
   const categories = [
     "Ficción contemporánea",
     "Literatura clásica",
@@ -65,12 +70,13 @@ export default function BookRegister() {
     "Autoayuda y desarrollo personal",
   ];
 
+  // Función para enviar los datos del libro al servidor
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.post( urlBase, bookData);
-      console.log(bookData);
+      await axios.post(urlBase, bookData);
+      // Limpiar los campos del formulario después del registro exitoso
       setBookData({
         bookName: "",
         author: "",
@@ -82,6 +88,7 @@ export default function BookRegister() {
         bookType: "",
         bookImage: "",
       });
+      // Mostrar un mensaje de éxito al usuario
       Swal.fire({
         icon: "success",
         title: "¡Excelente!",
@@ -89,7 +96,7 @@ export default function BookRegister() {
       });
     } catch (error) {
       console.error("Error al guardar el libro:", error);
-      console.log(bookData);
+      // Mostrar un mensaje de error al usuario en caso de que falle el registro
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -98,11 +105,13 @@ export default function BookRegister() {
     }
   };
 
+  // Función para abrir el popup para subir la imagen
   const abrirPopup = () => {
-    // Abrir el popup con el enlace de YouTube
+    // Abrir el popup con el enlace proporcionado
     window.open("https://es.imgbb.com/", "Popup", "width=600,height=400");
   };
 
+  // Desestructurar los datos del libro del estado
   const {
     bookName,
     author,
@@ -114,6 +123,7 @@ export default function BookRegister() {
     bookType,
     bookImage,
   } = bookData;
+
 
   return (
     <div className="bg-login">
