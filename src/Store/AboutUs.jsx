@@ -26,7 +26,7 @@ export default function AboutUs() {
                     <div className='d-flex justify-content-center'>
                         <div>
                             <div>
-                                <img src="./loginCapybara.png" className="img-team rounded-circle" alt="Logo" />
+                                <img src="./fotoLevi.jpg" className="img-team rounded-circle" alt="Logo" />
                             </div>
                             <div className='text-center d-flex justify-content-center py-2'>
                                 <h5 className='text-black' style={{ width: "150px" }}>Levis Javier Aguiar Torres</h5>
@@ -35,7 +35,7 @@ export default function AboutUs() {
 
                         <div>
                             <div>
-                                <img src="./loginCapybara.png" className="img-team rounded-circle" alt="Logo" />
+                                <img src="./fotoDavidson.jpg" className="img-team rounded-circle" alt="Logo" />
                             </div>
                             <div className='text-center d-flex justify-content-center py-2'>
                                 <h5 className='text-black' style={{ width: "150px" }}>Davidson Arley Pérez Jiménez</h5>
@@ -44,7 +44,7 @@ export default function AboutUs() {
 
                         <div>
                             <div>
-                                <img src="./loginCapybara.png" className="img-team rounded-circle" alt="Logo" />
+                                <img src="./fotoJimmy.jpg" className="img-team rounded-circle" alt="Logo" />
                             </div>
                             <div className='text-center d-flex justify-content-center py-2'>
                                 <h5 className='text-black' style={{ width: "150px" }}>Jimmy White Gómez Ramos</h5>
@@ -53,7 +53,7 @@ export default function AboutUs() {
 
                         <div>
                             <div>
-                                <img src="./loginCapybara.png" className="img-team rounded-circle" alt="Logo" />
+                                <img src="./fotoJunior.jpg " className="img-team rounded-circle" alt="Logo" />
                             </div>
                             <div className='text-center d-flex justify-content-center py-2'>
                                 <h5 className='text-black' style={{ width: "150px" }}>Osvairo Junior Moreno Correa</h5>
