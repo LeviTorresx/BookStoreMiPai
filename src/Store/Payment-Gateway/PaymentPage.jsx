@@ -72,19 +72,47 @@ export default function PaymentPage() {
     };
 
     try {
+      // Mostrar alerta de carga
+      Swal.fire({
+        title: "Procesando pago",
+        text: "Por favor, espera unos momentos...",
+        allowOutsideClick: false,
+        timer: 20000, // Tiempo de espera en milisegundos (20 segundos)
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
+      // Simular una espera de 2 segundos (puedes quitar esta línea en tu código final)
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Realizar la solicitud de pago
       await axios.post(
         "http://localhost:8080/book-orders/save-book-order",
         requestData
       );
+
+      // Ocultar la alerta de carga
+      Swal.close();
+      
+      // Mostrar mensaje de éxito
       Swal.fire(
         "Pago exitoso",
         "Tu pago ha sido procesado correctamente",
         "success"
       );
+
+      // Mostrar el modal de factura
       setShowInvoiceModal(true);
+
+      // Limpiar el almacenamiento local
       localStorage.removeItem("booksShipping");
     } catch (error) {
       console.error("Error:", error);
+      // Ocultar la alerta de carga en caso de error
+      Swal.close();
+      // Mostrar mensaje de error
       Swal.fire("Error", "Hubo un problema al procesar el pago", "error");
     }
   };
