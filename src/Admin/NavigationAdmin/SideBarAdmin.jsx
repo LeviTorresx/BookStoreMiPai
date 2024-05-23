@@ -33,7 +33,7 @@ export default function SideBar() {
             </a>
           </li>
           <li>
-            <a href="/settings">
+            <a href="/about-us">
               <FaUserGroup size={"30"} /> <span> Sobre nosotros</span>
             </a>
           </li>

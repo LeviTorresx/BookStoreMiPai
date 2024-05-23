@@ -54,7 +54,7 @@ export default function Register() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Email already exists!",
+        text: "Este correo ya existe",
       });
       navegacion("/login");
     } else {
@@ -64,8 +64,8 @@ export default function Register() {
       // redirigimos a la página de inicio de sesión
       Swal.fire({
         icon: "success",
-        title: "Nice",
-        text: "Successful Registration!",
+        title: "Has creado tu cuenta",
+        text: "¡Registro exitoso!",
       });
       navegacion("/login");
     }

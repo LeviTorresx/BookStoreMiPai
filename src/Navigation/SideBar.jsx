@@ -5,8 +5,10 @@ import { FaCheckCircle } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
 import { FaPercentage } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
+import { useLocation } from "react-router-dom";
 
 export default function SideBar({ administratorAccess }) {
+  const location = useLocation();
 
   const access = () => {
     return administratorAccess === "ADMINISTRATOR";
@@ -16,6 +18,15 @@ export default function SideBar({ administratorAccess }) {
     <div>
       <div className="sidebar bg-light">
         <ul>
+          {location.pathname === '/about-us' &&(
+            <li>
+              <a href="/">
+                <img src="./logoMipaiBookstore2.png" alt="Logo" width="40" style={{marginLeft: '-5px'}} />
+                <span>Volver a la tienda</span>
+              </a>
+            </li>
+          )}
+
           {access() && (
             <li>
               <a href="/admin/book-tableContent">
@@ -43,7 +54,7 @@ export default function SideBar({ administratorAccess }) {
             </a>
           </li>
           <li>
-            <a target="_blank" rel="noreferrer" href="https://github.com/LeviTorresx">
+            <a href="/about-us">
               <FaUserGroup size={"30"} /> <span> Sobre nosotros</span>
             </a>
           </li>

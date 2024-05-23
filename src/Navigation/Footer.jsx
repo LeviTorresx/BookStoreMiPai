@@ -28,9 +28,6 @@ export default function Footer() {
           <h6><FaInstagram size={"30"}/></h6>
         </div>
       </div>
-      <div className="border-top border-black mt-4">
-
-      </div>
     </div>
   );
 }

@@ -9,6 +9,7 @@ import Store from "./Store/Store";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import ProtectedRouteAdmin from "./utils/protectedRouteAdmin";
 import PaymentPage from "./Store/Payment-Gateway/PaymentPage";
+import AboutUs from "./Store/AboutUs";
 import { useState } from "react";
 import { getUserData } from "./utils/GetUser";
 
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Store />} />
           <Route exact path="/payment" element={<PaymentPage />} />
+          <Route exact path="/about-us" element={<AboutUs/>} />
 
           <Route element={<ProtectedRoute canActivate={user} redirect={"/"} />}>
             <Route path="/login" element={<Login />} />

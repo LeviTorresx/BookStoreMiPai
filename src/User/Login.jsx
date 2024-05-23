@@ -32,8 +32,8 @@ export default function Login() {
       if (response.data) {
         Swal.fire({
           icon: "success",
-          title: "Nice!",
-          text: "Login success",
+          title: "Has iniciado sesión",
+          text: "Inicio de sesión exitoso",
         });
 
         const userDataResponse = await axios.get(
@@ -53,7 +53,7 @@ export default function Login() {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Invalid email or password. Please try again.",
+          text: "Correo o contraseña incorrecto, inténtalo de nuevo",
         }); // Mostrar un mensaje de error al usuario
       }
     } catch (error) {
@@ -73,13 +73,13 @@ export default function Login() {
       <div>
         <div className="login-form-container">
           <img src="/logoMipaiBookstore1.png" alt="" />
-          <h2 className="text-center p-3 fw-semibold">Welcome!!!</h2>
+          <h2 className="text-center p-3 fw-semibold">¡Bienvenido!</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              Enter your email
+              Ingresa tu correo
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="Correo"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -87,10 +87,10 @@ export default function Login() {
               />
             </div>
             <div className="form-group">
-              Enter your password
+              Ingresa tu contraseña
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Contraseña"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
@@ -99,21 +99,21 @@ export default function Login() {
             </div>
             <div className="container-button">
               <button className="button px-5" type="submit">
-                LOG IN
+                Iniciar sesión
               </button>
             </div>
           </form>
         </div>
       </div>
       <div className="login-form-container">
-        <span className="textmov">don't have an account?</span>
+        <span className="textmov">¿No tienes una cuenta todavía?</span>
         <a href="/register">
           <button
             type="submit"
             className="button btn-singup"
             style={{ marginLeft: "50px" }}
           >
-            Sing up
+            Registrarse
           </button>
         </a>
       </div>
